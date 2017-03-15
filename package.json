@@ -1,0 +1,19 @@
+{
+  "name": "orange-to-orange",
+  "version": "1.0.0",
+  "description": "orange-to-orange-game-app",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "heroku"
+  ],
+  "author": "Paul, Scott, Neil",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "engines": {
+    "node": "4.1.1"
+  }
