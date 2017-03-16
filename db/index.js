@@ -20,4 +20,10 @@ var gameInstanceSchema = mongoose.schema({
   currentRound: Number
 });
 
+var userSchema = mongoose.schema({
+	id: Number,
+	username: String
+});
+
 module.exports.gameInstanceModel = mongoose.model('gameInstanceModel', gameInstanceSchema);
+module.exports.userModel = mongoose.model('userModel', userSchema);
