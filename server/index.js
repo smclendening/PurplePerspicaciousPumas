@@ -4,6 +4,17 @@ var port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.listen(port, function() {
-	console.log('App is listening on port: ', port);
-})
+var server = app.listen(port, function() {
+  console.log('App is listening on port: ', port);
+});
+
+var io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('disconnect', () => {
+    console.log('a user disconnected');
+  });
+});
+
