@@ -23,7 +23,7 @@ var gameInstanceSchema = mongoose.schema({
 var userSchema = mongoose.schema({
 	id: Number,
 	username: String
-})
+});
 
 module.exports.gameInstanceModel = mongoose.model('gameInstanceModel', gameInstanceSchema);
-model.exports.userModel = mongoose.model('userModel', userSchema);
+module.exports.userModel = mongoose.model('userModel', userSchema);
