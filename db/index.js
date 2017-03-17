@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/greenfield');
+var Schema = mongoose.Schema;
 
-var db = mongoose.conncetion;
+var db = mongoose.connection;
 
 db.on('error', function() {
   console.log('mongoose connection error');
@@ -11,7 +12,7 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var gameInstanceSchema = mongoose.schema({
+var gameInstanceSchema = new Schema({
   id: Number,
   gameName: String,
   password: String,
@@ -20,7 +21,7 @@ var gameInstanceSchema = mongoose.schema({
   currentRound: Number
 });
 
-var userSchema = mongoose.schema({
+var userSchema = new Schema({
 	username: {type: String, unique: true }
 });
 
