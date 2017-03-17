@@ -20,11 +20,12 @@ class App extends React.Component {
 	}
 
 	postUsername(username) {
+		console.log(username);
 		$.ajax({
 			url: 'http://localhost:3000/users',
 			method: 'POST',
 			headers: {'content-type': 'application/json'},
-			data: JSON.stringify('username': username),
+			data: JSON.stringify({'username': username}),
 			success: (data) => {
 				console.log('added user to users DB');
 			},
@@ -38,7 +39,7 @@ class App extends React.Component {
 		return (
 			<div>
 				<h1>Oranges To Oranges</h1>
-				<ChooseUsername onClick={this.postUsername}/>
+				<ChooseUsername onSubmit={this.postUsername}/>
 			</div>
 		);
 	}

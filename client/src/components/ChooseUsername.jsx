@@ -5,24 +5,24 @@ class ChooseUsername extends React.Component {
     super(props)
 
     this.state = {
-      username: null
+      username: ''
     }
 
-    this.updateState = this.updateState.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  updateState(e) {
+  handleChange(event) {
     this.setState({
-      username: e.target.value
-    })
+      username: event.target.value
+    });
   }
 
   render() {
     return (
       <div id="choose-username">
-        <form> 
-          <input placeholder="Choose a username..." type="text" onBlur={this.updateState} />
-          <button type="button" onClick={() => this.props.onClick(this.state.username)}>Submit</button>
+        <form onSubmit={() => this.props.onSubmit(this.state.username)}> 
+          <input placeholder="Choose a username..." type="text" value={this.state.username} onChange={this.handleChange} />
+          <input type="submit" value="Submit" />
         </form>
       </div>
     )
