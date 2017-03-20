@@ -4,8 +4,30 @@ var port = process.env.PORT || 3000;
 var bodyParser = require('body-parser');
 var models = require('../db/index.js');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
+var redis = require('redis-url').connect();
+
+var sessionStore = new RedisStore({ client: redis});
 
 app.use(bodyParser.json());
+
+
+app.use(session({
+  store: sessionStore,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    maxAge: 2419200000
+  },
+  secret: 'keyboard cat'
+}));
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
 
 app.use(express.static(__dirname + '/../client/dist'));
 
