@@ -15,13 +15,19 @@
   "author": "Paul, Scott, Neil",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
+    "connect-redis": "^3.2.0",
     "express": "^4.15.2",
+    "express-session": "^1.15.1",
     "jquery": "^3.2.0",
     "mongodb": "^2.2.24",
     "mongoose": "^4.9.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "redis-url": "^1.2.1",
     "socket.io": "^1.7.3"
   },
   "engines": {
