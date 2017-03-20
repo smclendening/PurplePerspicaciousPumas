@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import SignUp from './components/SignUp.jsx';
+import io from 'socket.io-client';
+
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -10,10 +12,18 @@ class App extends React.Component {
         this.handleSignUp = this.handleSignUp.bind(this);
         this.connectToSocket = this.connectToSocket.bind(this);
     }
-    componentDidMount() {}
+    componentDidMount() {
+        var socket = io.connect('http://localhost:3000');
+        socket.on('connect', function() {
+            console.log('Connected');
+        });
+        socket.on('disconnect', function() {
+            console.log('disconnected');
+        });
+        
+    }
     connectToSocket() {
         console.log('trying to connect');
-        var socket = io();
     }
     handleSignUp(email, username, password) {
         var context = this;

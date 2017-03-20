@@ -47,10 +47,11 @@ passport.use(new LocalStrategy(
     User.findOne({username: username}, function (err, user) {
       if (err) {
         return done (err);
-      } else if (user.length === 0) {
+      } else if (user === null) {
         return done (null, false, {message: 'Incorrect username'});
       } else {
-        if (user[0].authenticate(password)) {
+        console.log(user);
+        if (user.authenticate(password)) {
           done (null, user.public());
         } else {
           setTimeout(function() {
@@ -83,7 +84,7 @@ app.post('/signup', function (req, res ) {
     })
   }).then(function() {
     console.log('2');
-    req.login(req.body, function(err) {
+    req.logIn(req.body, function(err) {
       if (err) {
         throw new Error(err)
       } else {
@@ -95,8 +96,14 @@ app.post('/signup', function (req, res ) {
   })
 })
 
-app.post('login', passport.authenticate('local'), function(req, res) {
-  res.json({loggedin: true});
+app.post('/login', passport.authenticate('local'), function(req, res) {
+  req.logIn(req.body, function(err) {
+    if (err) {
+      throw new Error(err)
+    } else {
+      res.status(201).send({loggedin: true});
+    }
+  })
 });
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -114,7 +121,6 @@ var server = app.listen(port, function() {
 var io = require('socket.io')(server);
 
 io.use(passportSocketIo.authorize({
-  key: 'connect.sid',
   secret: 'keyboard cat',
   store: sessionStore,
   passport: passport,

@@ -41,12 +41,12 @@ userSchema.pre('save', function(next) {
   return next();
 });
 
-userSchema.statics.public = function() {
+userSchema.methods.public = function() {
   delete this.hash;
   return this;
 };
 
-userSchema.statics.authenticate = function(password) {
+userSchema.methods.authenticate = function(password) {
   if (bcrypt.compareSync(password, this.hash) && this.attempts < 20) {
     this.attempts = 0;
     this.save();
