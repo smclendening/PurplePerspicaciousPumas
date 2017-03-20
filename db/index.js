@@ -5,8 +5,8 @@ var Schema = mongoose.Schema;
 
 var db = mongoose.connection;
 
-db.on('error', function() {
-  console.log('mongoose connection error');
+db.on('error', function(error) {
+  console.log('mongoose connection error', error);
 });
 
 db.once('open', function() {
@@ -30,6 +30,17 @@ var userSchema = new Schema({
   attempts: {type: Number, default: 0}
 });
 
+userSchema.pre('save', function(next) {
+  this.email = this.email.toLowerCase();
+  var password = this.password || '';
+  delete this.password;
+  if (!this.hash) {
+    // assuming there is no hash yet, set the hash
+    this.hash = bcrypt.hashSync(password, 10);
+  }
+  return next();
+});
+
 userSchema.statics.public = function() {
   delete this.hash;
   return this;
@@ -50,16 +61,6 @@ userSchema.statics.authenticate = function(password) {
 
 var User = mongoose.model('userModel', userSchema);
 
-User.pre('save', function(next) {
-  this.email = this.email.toLowerCase();
-  var password = this.password || '';
-  delete this.password;
-  if (!this.hash) {
-    // assuming there is no hash yet, set the hash
-    this.hash = bcrypt.hashSync(password, 10);
-  }
-  return next();
-});
 
 
 

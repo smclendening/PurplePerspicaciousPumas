@@ -8,9 +8,11 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
 var redis = require('redis-url').connect();
-
+var passportSocketIo = require('passport.socketio');
+var cookieParser = require('cookie-parser');
+var RedisStore = require('connect-redis')(session);
 var sessionStore = new RedisStore({ client: redis});
-
+var LocalStrategy = require('passport-local').Strategy;
 app.use(bodyParser.json());
 
 
@@ -40,20 +42,67 @@ passport.deserializeUser(function(username, done) {
   })
 });
 
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({username: username}, function (err, user) {
+      if (err) {
+        return done (err);
+      } else if (user.length === 0) {
+        return done (null, false, {message: 'Incorrect username'});
+      } else {
+        if (user[0].authenticate(password)) {
+          done (null, user.public());
+        } else {
+          setTimeout(function() {
+            done(null, false, {message: 'Sorry, your password is incorrect'});
+          }, 3000);
+        }
+      }
+    });
+  }
+));
+
+app.post('/signup', function (req, res ) {
+  console.log(req.body);
+  var username = req.body.username;
+  User.findOne({username: username}).exec().then(function(user) {
+    console.log('0', user);
+    if (user !== null) {
+      console.log('err');
+      throw new Error('that username is taken');
+    }
+    console.log('.5');
+    console.log('.7');
+  }).then(function() {
+    console.log('1');
+    var user = new User(req.body);
+    return user.save(function(err) {
+    	if (err) {
+        throw new Error('that email is taken');
+    	} 
+    })
+  }).then(function() {
+    console.log('2');
+    req.login(req.body, function(err) {
+      if (err) {
+        throw new Error(err)
+      } else {
+        res.status(201).send({loggedin: true});
+      }
+    })
+  }).catch(function(err) {
+    res.status(400).send(err);
+  })
+})
+
+app.post('login', passport.authenticate('local'), function(req, res) {
+  res.json({loggedin: true});
+});
+
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/users', function (req, res) {
   var username = req.body.username;
-  var user = new User({
-  	username: username
-  });
-  user.save(function(err) {
-  	if (err) {
-  		res.status(400).send('username exists')
-  	} else {
-  		res.status(201).send('success')
-  	}
-  })
 });
 
 
@@ -63,6 +112,14 @@ var server = app.listen(port, function() {
 });
 
 var io = require('socket.io')(server);
+
+io.use(passportSocketIo.authorize({
+  key: 'connect.sid',
+  secret: 'keyboard cat',
+  store: sessionStore,
+  passport: passport,
+  cookieParser: cookieParser
+}));
 
 io.on('connection', (socket) => {
   console.log('a user connected');
