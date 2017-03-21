@@ -30,12 +30,10 @@ class SignUp extends React.Component {
     return (
       <div id="choose-username">
         <h4>Create a New Account</h4>
-        <form onSubmit={() => this.props.onSubmit(this.state.email, this.state.username, this.state.password)}> 
           <input placeholder="Email..." type="text" value={this.state.email} onChange={this.handleEmailChange} />
           <input placeholder="Choose a username..." type="text" value={this.state.username} onChange={this.handleUsernameChange} />
           <input placeholder="Choose a password..." type="text" value={this.state.password} onChange={this.handlePasswordChange} />
-          <input type="submit" value="Submit" />
-        </form>
+          <button onClick={() => this.props.onSubmit(this.state.email, this.state.username, this.state.password)}>Submit</button>
       </div>
     )
   }

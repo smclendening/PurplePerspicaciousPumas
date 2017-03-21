@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import SignUp from './components/SignUp.jsx';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 class App extends React.Component {
     constructor(props){
@@ -31,9 +31,10 @@ class App extends React.Component {
             url: 'http://localhost:3000/signup',
             method: 'POST',
             headers: {'content-type': 'application/json'},
-            data: JSON.stringify({'email': email, 'username': username, 'password': password}),
+            data: JSON.stringify({'username': username, 'email': email, 'password': password}),
             success: (data) => {
                 console.log('added user to users DB');
+                console.log(data);
             },
             error: (err) => {
                 console.log('error in username POST: ', err);

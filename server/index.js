@@ -33,10 +33,12 @@ passport.deserializeUser(User.deserializeUser());
 app.post('/signup', function (req, res) {
   User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function (err, user) {
     if (err) {
-      return res.status(400).send('Username Taken')
+      console.log(err);
+      return res.status(400).send(err);
     } 
 
     passport.authenticate('local')(req, res, function() {
+      console.log('success', user);
       res.status(201).send('created');
     })
   });
@@ -44,6 +46,10 @@ app.post('/signup', function (req, res) {
 
 app.post('/login', passport.authenticate('local'), function(req, res) {
   res.status(201).send('success')
+})
+
+app.get('/test', passport.authenticate('local'), function(req, res) {
+  res.status(200).send('success')
 })
 // app.post('/users', function (req, res) {
 //   var username = req.body.username;
