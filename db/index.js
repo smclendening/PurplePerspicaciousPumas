@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/greenfield');
+mongoose.connect('mongodb://localhost/orange-to-orange');
 var Schema = mongoose.Schema;
+var passportLocalMongoose = require('passport-local-mongoose');
 
 var db = mongoose.connection;
 
@@ -22,8 +23,12 @@ var gameInstanceSchema = new Schema({
 });
 
 var userSchema = new Schema({
-	username: {type: String, unique: true }
+	username: {type: String, unique: true },
+	password: String,
+	email: String,
 });
+
+userSchema.plugin(passportLocalMongoose);
 
 module.exports.gameInstanceModel = mongoose.model('gameInstanceModel', gameInstanceSchema);
 module.exports.userModel = mongoose.model('userModel', userSchema);
