@@ -3,6 +3,7 @@ mongoose.connect('mongodb://localhost/orange-to-orange');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 var dummyGames = require('./dummy-data');
+var dummyGamePlayThrough = require('./game-playthrough-dummy-data.js')
 
 var db = mongoose.connection;
 
@@ -12,7 +13,9 @@ db.on('error', function() {
 
 db.once('open', function() {
   console.log('mongoose connected successfully');
+  console.log(typeof dummyGamePlayThrough);
 });
+
 
 var gameInstanceSchema = new Schema({
   id: Number,
@@ -83,6 +86,19 @@ gameFour.save(function (err, game) {
 	 console.log('gameAdded', game);
 	}
 });
+
+for (game in dummyGamePlayThrough) {
+	let newGame = new gameInstanceModel(dummyGamePlayThrough[game]);
+	newGame.save(function (err, game) {
+		if (err) {
+			console.log('error', error);
+			return
+		} else {
+		 console.log('gameAdded', game);
+		}
+	});
+}
+
 
 
 module.exports.gameInstanceModel = gameInstanceModel;
