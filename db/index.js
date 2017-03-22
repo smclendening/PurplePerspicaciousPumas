@@ -84,5 +84,5 @@ gameFour.save(function (err, game) {
 });
 
 
-// module.exports.gameInstanceModel = mongoose.model('gameInstanceModel', gameInstanceSchema);
+module.exports.gameInstanceModel = gameInstanceModel;
 module.exports.userModel = mongoose.model('userModel', userSchema);
