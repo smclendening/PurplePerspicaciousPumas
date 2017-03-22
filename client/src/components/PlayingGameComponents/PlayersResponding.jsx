@@ -2,8 +2,7 @@ import React from 'react';
 
 const PlayersResponding = () => (
   <div id="players-responding">
-    <h3>Please wait...</h3>
-    <h2>Players are responding to prompt</h2>
+    <h3>Please Wait - Players Are Responding to the Prompt</h3>
   </div>
 )
 
