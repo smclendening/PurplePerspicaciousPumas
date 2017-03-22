@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import SignUp from './components/SignUp.jsx';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import Lobby from './components/Lobby.jsx';
 import Home from './components/Home.jsx';
 import Game from './components/Game.jsx';
@@ -27,7 +27,7 @@ class App extends React.Component {
         success: (data) => {
           console.log('added user to users DB');
           console.log(data);
-          browserHistory.push('/lobby');
+          hashHistory.push('/lobby');
         },
         error: (err) => {
             console.log('error in username POST: ', err);
@@ -45,7 +45,7 @@ class App extends React.Component {
         success: (data) => {
           console.log('added user to users DB');
           console.log(data);
-          browserHistory.push('/lobby');
+          hashHistory.push('/lobby');
         },
         error: (err) => {
             console.log('error in login POST: ', err);
@@ -56,13 +56,13 @@ class App extends React.Component {
     sendToGame(gameObj) {
       console.log(gameObj);
       var name = gameObj.gameName;
-      browserHistory.push(/game/ + name);
+      hashHistory.push(/game/ + name);
     }
 
     render() {
       return (
         <div>
-          <Router history={browserHistory}>
+          <Router history={hashHistory}>
             <Route path="/" component={Home} onSignUp={this.handleSignUp} onLogIn={this.handleLogIn}/>
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame}/>
             <Route path="/game/:gamename" component={Game} />
