@@ -1,6 +1,7 @@
 import React from 'react';
 import Prompt from './PlayingGameComponents/Prompt.jsx';
 import CurrentJudge from './PlayingGameComponents/CurrentJudge.jsx';
+import PlayersResponding from './PlayingGameComponents/PlayersResponding.jsx';
 // this.props.game = game instance object
 
 class PlayingGame extends React.Component{
@@ -26,7 +27,7 @@ class PlayingGame extends React.Component{
         </div>
         <div>
         <h2>Depending on the stage of the round:</h2>
-        <h3>Respond to Prompt Component</h3>
+        <PlayersResponding/>
         <h3>Players Responding Component</h3>
         <h3>Select Winner Component</h3>
         <h3>See Responses Component</h3>
