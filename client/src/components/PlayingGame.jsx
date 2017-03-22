@@ -24,12 +24,10 @@ class PlayingGame extends React.Component{
   getRole() {
     // if your index in players arr equals curRound, you're the judge
     var curRound = this.props.game.currentRound;
-    console.log('HEY', this.props.user);
+    
     if (this.props.game.players[curRound] === this.props.user) {
       this.setState({role: 'judge'})
     } else {
-      console.log('player in index: ', this.props.game.players[curRound]);
-      console.log('props user: ', this.props.user);
     // otherwise you are player
       this.setState({role: 'player'})
     }
