@@ -1,4 +1,6 @@
 import React from 'react';
+import GameList from './GameList.jsx';
+import $ from 'jquery';
 
 class Lobby extends React.Component {
   constructor(props) {
@@ -20,9 +22,12 @@ class Lobby extends React.Component {
       headers: {'content-type': 'application/json'},
       success: (data) => {
         console.log('got games: ', data);
+        this.setState({
+          games: data
+        })
       },
       error: (err) => {
-          console.log('error in username POST: ', err);
+          console.log('error getting games: ', err);
       }
     });
   }
@@ -30,8 +35,9 @@ class Lobby extends React.Component {
   render() {
     return (
       <div id="lobby">
-        <h4>Lobby!</h4>
-        <GameList games={this.state.games}/>
+        <h3>Lobby</h3>
+        <h4>Games:</h4>
+        {this.state.games && <GameList games={this.state.games}/>}
       </div>
     )
   }

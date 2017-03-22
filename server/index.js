@@ -6,7 +6,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
+var User = models.userModel;
+var Game = models.gameInstanceModel;
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -23,7 +24,6 @@ app.use(passport.session());
 app.use(express.static(__dirname + '/../client/dist'));
 
 // passport config
-var User = models.userModel;
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -53,8 +53,12 @@ app.get('/test', passport.authenticate('local'), function(req, res) {
   res.status(200).send('success')
 })
 
-app.get('/', function(req, res) {
-  User.
+app.get('/games', function(req, res) {
+  var promise = Game.find({}).exec();
+
+  promise.then(function(games) {
+    res.json(games);
+  })
 })
 // app.post('/users', function (req, res) {
 //   var username = req.body.username;
