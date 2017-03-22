@@ -5,6 +5,7 @@ import PlayersResponding from './PlayingGameComponents/PlayersResponding.jsx';
 import SeeResponses from './PlayingGameComponents/SeeResponses.jsx';
 import Winner from './PlayingGameComponents/Winner.jsx'
 import RespondToPrompt from './PlayingGameComponents/RespondToPrompt.jsx';
+import ChooseWinner from './PlayingGameComponents/ChooseWinner.jsx';
 // this.props.game = game instance object
 
 class PlayingGame extends React.Component{
@@ -44,14 +45,14 @@ class PlayingGame extends React.Component{
         <div>
           <CurrentJudge judge={curJudge} />
           <Prompt prompt={curPrompt}/>
-          <h3>Timer</h3>
         </div>
         <div>
         <h2>Depending on the stage of the round:</h2>
         {this.state.role === 'judge' && <PlayersResponding />}
         {this.state.role === 'player' && <RespondToPrompt />}
         <h3>Select Winner Component</h3>
-        {this.props.game.rounds[curRound].stage === 1 && <SeeResponses responses={this.props.game.rounds[curRound].responses}/>}
+        {this.props.game.rounds[curRound].stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={this.props.game.rounds[curRound].responses} />}
+        {this.props.game.rounds[curRound].stage === 1 && this.state.role === 'player' && <SeeResponses responses={this.props.game.rounds[curRound].responses}/>}
         <h3>Winner Component</h3>
         {this.props.game.rounds[curRound].stage === 2 && <Winner responses={this.props.game.rounds[curRound].responses} winner={this.props.game.rounds[curRound].winner}/>}
 
