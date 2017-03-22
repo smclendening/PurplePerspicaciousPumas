@@ -41,9 +41,8 @@ class Game extends React.Component {
       <div id="game">
         <h4>Game!</h4>
         {this.props.params.gamename}
-        {this.state.stage[0] === 'waiting' && <WaitingRoom numPlayers={this.state.numPlayers} players={this.state.players}/>}
-        {this.state.stage[1] === 'playing' && <PlayingGame/>}
-        {this.state.game && <WaitingRoom numPlayers={this.state.game.players.length} players={this.state.game.players}/>}
+        {this.state.game && {this.state.game.gameStage === 'waiting'} && <WaitingRoom numPlayers={this.state.game.players.length} players={this.state.game.players}/>}
+        {this.state.game && {this.state.game.gameStage === 'playing'} && <PlayingGame />}
       </div>
     )
   }
