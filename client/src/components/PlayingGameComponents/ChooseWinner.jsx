@@ -10,7 +10,7 @@ class ChooseWinner extends React.Component {
     return (
       <div id="choose-winner">
         {props.responses.map((response) => (
-            <div> 
+            <div onClick={() => this.props.onClick()}> 
               Response: {response[0]} 
             </div>
           ))}

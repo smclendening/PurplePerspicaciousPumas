@@ -16,6 +16,7 @@ class PlayingGame extends React.Component{
     };
 
     this.getRole = this.getRole.bind(this);
+    this.handleJudgeSelection = this.handleJudgeSelection.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +33,10 @@ class PlayingGame extends React.Component{
     // otherwise you are player
       this.setState({role: 'player'})
     }
+  }
+
+  handleJudgeSelection() {
+    console.log('JUDGE HAS SELECTED');
   }
 
   render() {
@@ -51,7 +56,7 @@ class PlayingGame extends React.Component{
         {this.state.role === 'judge' && <PlayersResponding />}
         {this.state.role === 'player' && <RespondToPrompt />}
         <h3>Select Winner Component</h3>
-        {this.props.game.rounds[curRound].stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={this.props.game.rounds[curRound].responses} />}
+        {this.props.game.rounds[curRound].stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={this.props.game.rounds[curRound].responses} onClick={this.handleJudgeSelection}/>}
         {this.props.game.rounds[curRound].stage === 1 && this.state.role === 'player' && <SeeResponses responses={this.props.game.rounds[curRound].responses}/>}
         <h3>Winner Component</h3>
         {this.props.game.rounds[curRound].stage === 2 && <Winner responses={this.props.game.rounds[curRound].responses} winner={this.props.game.rounds[curRound].winner}/>}
