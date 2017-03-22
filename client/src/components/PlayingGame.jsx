@@ -3,6 +3,7 @@ import Prompt from './PlayingGameComponents/Prompt.jsx';
 import CurrentJudge from './PlayingGameComponents/CurrentJudge.jsx';
 import PlayersResponding from './PlayingGameComponents/PlayersResponding.jsx';
 import SeeResponses from './PlayingGameComponents/SeeResponses.jsx';
+import Winner from './PlayingGameComponents/Winner.jsx'
 // this.props.game = game instance object
 
 class PlayingGame extends React.Component{
@@ -33,6 +34,8 @@ class PlayingGame extends React.Component{
         <h3>Select Winner Component</h3>
         {this.props.game.rounds[curRound].stage === 1 && <SeeResponses responses={this.props.game.rounds[curRound].responses}/>}
         <h3>Winner Component</h3>
+        {this.props.game.rounds[curRound].stage === 2 && <Winner responses={this.props.game.rounds[curRound].responses} winner={this.props.game.rounds[curRound].winner}/>}
+
         </div>
       </div>
       )
