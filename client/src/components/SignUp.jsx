@@ -26,6 +26,7 @@ class SignUp extends React.Component {
       password: event.target.value
     });
   }
+
   render() {
     return (
       <div id="choose-username">
@@ -33,7 +34,7 @@ class SignUp extends React.Component {
           <input placeholder="Email..." type="text" value={this.state.email} onChange={this.handleEmailChange} />
           <input placeholder="Choose a username..." type="text" value={this.state.username} onChange={this.handleUsernameChange} />
           <input placeholder="Choose a password..." type="text" value={this.state.password} onChange={this.handlePasswordChange} />
-          <button onClick={() => this.props.onSubmit(this.state.email, this.state.username, this.state.password)}>Submit</button>
+          <button onClick={() => this.props.route.onSubmit(this.state.email, this.state.username, this.state.password)}>Submit</button>
       </div>
     )
   }
