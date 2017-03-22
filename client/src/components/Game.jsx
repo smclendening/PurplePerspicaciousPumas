@@ -1,6 +1,5 @@
 import React from 'react';
 import WaitingRoom from './WaitingRoom.jsx';
-
 import PlayingGame from './PlayingGame.jsx';
 import $ from 'jquery';
 
@@ -8,7 +7,8 @@ class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      game: null
+      game: null,
+      user: null
     };
 
     this.getGameData = this.getGameData.bind(this);
@@ -29,6 +29,12 @@ class Game extends React.Component {
         this.setState({
           game: data[0]
         })
+
+        var numPlayers = data[0].players.length;
+
+        this.setState({
+          user: data[0].players[numPlayers - 1]
+        })
       },
       error: (err) => {
           console.log('error getting games: ', err);
@@ -42,7 +48,7 @@ class Game extends React.Component {
         <h4>Game!</h4>
         {this.props.params.gamename}
         {this.state.game && this.state.game.gameStage === 'waiting' && <WaitingRoom numPlayers={this.state.game.players.length} players={this.state.game.players}/>}
-        {this.state.game && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game}/>}
+        {this.state.game && this.state.user && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.user}/>}
       </div>
     )
   }
