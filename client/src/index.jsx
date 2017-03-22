@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import SignUp from './components/SignUp.jsx';
+import { Router, Route, browserHistory } from 'react-router';
+import Lobby from './components/Lobby.jsx';
 // import io from 'socket.io-client';
 
 class App extends React.Component {
@@ -10,46 +12,38 @@ class App extends React.Component {
         this.state = {
         }
         this.handleSignUp = this.handleSignUp.bind(this);
-        this.connectToSocket = this.connectToSocket.bind(this);
     }
-    // componentDidMount() {
-    //     var socket = io.connect('http://localhost:3000');
-    //     socket.on('connect', function() {
-    //         console.log('Connected');
-    //     });
-    //     socket.on('disconnect', function() {
-    //         console.log('disconnected');
-    //     });
-        
-    // }
-    connectToSocket() {
-        console.log('trying to connect');
-    }
+
     handleSignUp(email, username, password) {
-        var context = this;
-        $.ajax({
-            url: 'http://localhost:3000/signup',
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            data: JSON.stringify({'username': username, 'email': email, 'password': password}),
-            success: (data) => {
-                console.log('added user to users DB');
-                console.log(data);
-            },
-            error: (err) => {
-                console.log('error in username POST: ', err);
-            }
-        });
+      $.ajax({
+        url: 'http://localhost:3000/signup',
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        data: JSON.stringify({'username': username, 'email': email, 'password': password}),
+        success: (data) => {
+          console.log('added user to users DB');
+          console.log(data);
+          browserHistory.push('/lobby');
+        },
+        error: (err) => {
+            console.log('error in username POST: ', err);
+        }
+      });
     }
+
     render() {
-        return (
-            <div>
-                <h1>Oranges To Oranges</h1>
-                <SignUp onSubmit={this.handleSignUp}/>
-            </div>
-        );
+      return (
+        <div>
+          <Router history={browserHistory}>
+            <Route path="/" component={SignUp} onSubmit={this.handleSignUp} />
+            <Route path="/lobby" component={Lobby} />
+          </Router>
+        </div>
+      );
     }
 }
+             //   <SignUp onSubmit={this.handleSignUp}/>
+
 ReactDOM.render(
   <App/>,
   document.getElementById('app')
