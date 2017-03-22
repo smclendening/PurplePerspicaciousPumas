@@ -31,6 +31,7 @@ class Lobby extends React.Component {
     return (
       <div id="lobby">
         <h4>Lobby!</h4>
+        <GameList games={this.state.games}/>
       </div>
     )
   }

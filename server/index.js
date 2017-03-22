@@ -52,6 +52,10 @@ app.post('/login', passport.authenticate('local'), function(req, res) {
 app.get('/test', passport.authenticate('local'), function(req, res) {
   res.status(200).send('success')
 })
+
+app.get('/', function(req, res) {
+  User.
+})
 // app.post('/users', function (req, res) {
 //   var username = req.body.username;
 //   var user = new models.userModel({
