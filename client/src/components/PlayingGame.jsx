@@ -1,22 +1,26 @@
 import React from 'react';
 import Prompt from './PlayingGameComponents/Prompt.jsx';
+import CurrentJudge from './PlayingGameComponents/CurrentJudge.jsx';
 // this.props.game = game instance object
 
 class PlayingGame extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      role: null // can either be judge or player
+    };
   }
 
   render() {
     var curRound = this.props.game.currentRound;
     var curPrompt = this.props.game.rounds[curRound].prompt;
+    var curJudge = this.props.game.players[curRound];
 
     return (
       <div id="playing-game">
         <h2>Playing Game</h2>
         <div>
-          <h3>Current Judge</h3>
+          <CurrentJudge judge={curJudge} />
           <Prompt prompt={curPrompt}/>
           <h3>Timer</h3>
         </div>
