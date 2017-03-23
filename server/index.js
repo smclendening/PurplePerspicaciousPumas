@@ -68,22 +68,13 @@ app.get('/game', function(req, res) {
   promise.then(function(game) {
     res.json(game);
   })
-  //var promise = Game.find({})
-})
-// app.post('/users', function (req, res) {
-//   var username = req.body.username;
-//   var user = new models.userModel({
-//   	username: username
-//   });
-//   user.save(function(err) {
-//   	if (err) {
-//   		res.status(400).send('username exists')
-//   	} else {
-//   		res.status(201).send('success')
-//   	}
-//   })
+});
 
-// });
+app.get('/username', function(req, res) {
+  var user = req.session.passport.user;
+  res.status(200).send(user);
+});
+
 
 var server = app.listen(port, function() {
   console.log('App is listening on port: ', port);
@@ -97,7 +88,7 @@ io.on('connection', (socket) => {
   socket.on('join game', function(data) {
     // data needs to be gamename and username
     console.log('client joining room: ', data);
-    socket.join(data.name);
+    socket.join(data.gameName);
     // add client to game DB if they're not already in players list
     // then, check num of players in players list
       // if it's 4 and gameStage is waiting 

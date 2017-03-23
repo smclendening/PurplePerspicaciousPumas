@@ -9,18 +9,16 @@ class Game extends React.Component {
     super(props)
     this.state = {
       game: null,
-      user: null
+      username: null
     };
 
     this.getGameData = this.getGameData.bind(this);
+    this.getUsername = this.getUsername.bind(this);
   }
 
   componentDidMount() {
     this.getGameData(this.props.params.gamename);
-    console.log('join the socket');
-    const socket = io();
-    // TODO: change data to be gamename and username
-    socket.emit('join game', this.props.params.gamename);
+    this.getUsername();
   }
 
   socketHandlers() {
@@ -50,18 +48,27 @@ class Game extends React.Component {
       headers: {'content-type': 'application/json'},
       data: {name: gameName},
       success: (data) => {
-        this.setState({
-          game: data[0]
-        })
-
-        var numPlayers = data[0].players.length;
-
-        this.setState({
-          user: data[0].players[numPlayers - 1]
-        })
+        this.setState({game: data[0]})
       },
       error: (err) => {
           console.log('error getting games: ', err);
+      }
+    });
+  }
+
+  getUsername() {
+    $.ajax({
+      url: 'http://localhost:3000/username',
+      method: 'GET',
+      headers: {'content-type': 'application/json'},
+      success: (username) => {
+        this.setState({username: username}, function() {
+          const socket = io();
+          socket.emit('join game', {gameName: this.props.params.gamename, username: this.state.username});
+        });
+      },
+      error: (err) => {
+        console.log('error getting username', err);
       }
     });
   }
