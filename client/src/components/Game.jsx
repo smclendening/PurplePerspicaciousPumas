@@ -3,6 +3,8 @@ import WaitingRoom from './WaitingRoom.jsx';
 import PlayingGame from './PlayingGame.jsx';
 import $ from 'jquery';
 import io from 'socket.io-client';
+const socket = io();
+const context = this;
 
 class Game extends React.Component {
   constructor(props) {
@@ -14,6 +16,10 @@ class Game extends React.Component {
 
     this.getGameData = this.getGameData.bind(this);
     this.getUsername = this.getUsername.bind(this);
+
+    socket.on('start game', (gameObj) => {
+      context.setState({game: gameObj});
+    })
   }
 
   componentDidMount() {
@@ -63,7 +69,6 @@ class Game extends React.Component {
       headers: {'content-type': 'application/json'},
       success: (username) => {
         this.setState({username: username}, function() {
-          const socket = io();
           socket.emit('join game', {gameName: this.props.params.gamename, username: this.state.username});
         });
       },
