@@ -24,13 +24,11 @@ class PlayingGame extends React.Component{
   }
 
   getRole() {
-    // if your index in players arr equals curRound, you're the judge
     var curRound = this.props.game.currentRound;
     
     if (this.props.game.players[curRound] === this.props.user) {
       this.setState({role: 'judge'})
     } else {
-    // otherwise you are player
       this.setState({role: 'player'})
     }
   }
@@ -43,6 +41,9 @@ class PlayingGame extends React.Component{
     var curRound = this.props.game.currentRound;
     var curPrompt = this.props.game.rounds[curRound].prompt;
     var curJudge = this.props.game.players[curRound];
+    var stage = this.props.game.rounds[curRound].stage;
+    var responses = this.props.game.rounds[curRound].responses;
+    var winner = this.props.game.rounds[curRound].winner;
 
     return (
       <div id="playing-game">
@@ -52,18 +53,14 @@ class PlayingGame extends React.Component{
           <Prompt prompt={curPrompt}/>
         </div>
         <div>
-        <h2>Depending on the stage of the round:</h2>
-        {this.state.role === 'judge' && <PlayersResponding />}
-        {this.state.role === 'player' && <RespondToPrompt />}
-        <h3>Select Winner Component</h3>
-        {this.props.game.rounds[curRound].stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={this.props.game.rounds[curRound].responses} onClick={this.handleJudgeSelection}/>}
-        {this.props.game.rounds[curRound].stage === 1 && this.state.role === 'player' && <SeeResponses responses={this.props.game.rounds[curRound].responses}/>}
-        <h3>Winner Component</h3>
-        {this.props.game.rounds[curRound].stage === 2 && <Winner responses={this.props.game.rounds[curRound].responses} winner={this.props.game.rounds[curRound].winner}/>}
-
+        {stage === 0 && this.state.role === 'judge' && <PlayersResponding />}
+        {stage === 0 && this.state.role === 'player' && <RespondToPrompt />}
+        {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} onClick={this.handleJudgeSelection}/>}
+        {stage === 1 && this.state.role === 'player' && <SeeResponses responses={responses}/>}
+        {stage === 2 && <Winner responses={responses} winner={winner}/>}
         </div>
       </div>
-      )
+    )
   }
 }
 
