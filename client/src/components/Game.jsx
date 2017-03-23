@@ -9,15 +9,17 @@ class Game extends React.Component {
     super(props)
     this.state = {
       game: null,
-      user: null
+      username: null
     };
 
     this.getGameData = this.getGameData.bind(this);
+    this.getUsername = this.getUsername.bind(this);
   }
 
   componentDidMount() {
     this.getGameData(this.props.params.gamename);
-    console.log('join the socket');
+    this.getUsername();
+
     const socket = io();
     // TODO: change data to be gamename and username
     socket.emit('join game', this.props.params.gamename);
@@ -62,6 +64,21 @@ class Game extends React.Component {
       },
       error: (err) => {
           console.log('error getting games: ', err);
+      }
+    });
+  }
+
+  getUsername() {
+    $.ajax({
+      url: 'http://localhost:3000/username',
+      method: 'GET',
+      headers: {'content-type': 'application/json'},
+      success: (data) => {
+        console.log('got userinfo: ', data[0])
+        this.setState({username: data[0].username});
+      },
+      error: (err) => {
+        console.log('error getting username', err);
       }
     });
   }
