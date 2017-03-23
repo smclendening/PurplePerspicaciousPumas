@@ -49,7 +49,7 @@ gameOne.save(function (err, game) {
 		console.log('error', error);
 		return
 	} else {
-	 console.log('gameAdded', game);
+	// console.log('gameAdded', game);
 	}
 });
 
@@ -61,7 +61,7 @@ gameTwo.save(function (err, game) {
 		console.log('error', error);
 		return
 	} else {
-	 console.log('gameAdded', game);
+	// console.log('gameAdded', game);
 	}
 });
 
@@ -72,7 +72,7 @@ gameThree.save(function (err, game) {
 		console.log('error', error);
 		return
 	} else {
-	 console.log('gameAdded', game);
+	// console.log('gameAdded', game);
 	}
 });
 
@@ -83,7 +83,7 @@ gameFour.save(function (err, game) {
 		console.log('error', error);
 		return
 	} else {
-	 console.log('gameAdded', game);
+	// console.log('gameAdded', game);
 	}
 });
 
@@ -94,7 +94,7 @@ for (game in dummyGamePlayThrough) {
 			console.log('error', error);
 			return
 		} else {
-		 console.log('gameAdded', game);
+		// console.log('gameAdded', game);
 		}
 	});
 }
