@@ -19,7 +19,7 @@ db.once('open', function() {
 
 var gameInstanceSchema = new Schema({
   id: Number,
-  gameName: String,
+  gameName: {type: String, unique: true },
   password: String,
   players: Array, 
   rounds: Array, 
@@ -103,3 +103,4 @@ for (game in dummyGamePlayThrough) {
 
 module.exports.gameInstanceModel = gameInstanceModel;
 module.exports.userModel = mongoose.model('userModel', userSchema);
+module.exports.db = db;
