@@ -131,6 +131,9 @@ io.on('connection', (socket) => {
     // first, grab game instance obj
     // then check that username does not exist as index[1] of a response in responses array
       // if username doesn't exist yet, then add response to DB
+  socket.on('submit response', (data) => {
+    
+  })
 
     // check if there are 3 responses
       // if there are 3 responses go to current Round in round array and increment stage by 1
