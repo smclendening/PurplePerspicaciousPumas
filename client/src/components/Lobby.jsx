@@ -2,6 +2,9 @@ import React from 'react';
 import GameList from './GameList.jsx';
 import $ from 'jquery';
 
+//TODO:
+  // build logic to prevent users from joining a full game
+
 class Lobby extends React.Component {
   constructor(props) {
     super(props)
