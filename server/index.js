@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var User = models.userModel;
 var Game = models.gameInstanceModel;
+var queries = require('../db/db-queries.js')
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -89,11 +90,38 @@ io.on('connection', (socket) => {
     // data needs to be gamename and username
     console.log('client joining room: ', data);
     socket.join(data.gameName);
+    let username = data.username;
+    let gameName = data.gameName;
+    queries.retrieveGameInstance(gameName)
+    .then(function (game){
     // add client to game DB if they're not already in players list
+      if (!game.players.includes(username)) {
+        let players = game.players.slice(0);
+        players.push(username);
+        return queries.addPlayerToGameInstance(gameName, players);
+      } else {
+        next()
+      }
+    }).then(function () {
+      return queries.retrieveGameInstance(gameName);
+    }).then(function (game) {
     // then, check num of players in players list
       // if it's 4 and gameStage is waiting 
+      if (game.players.length === 4 && game.gameStage === 'waiting') {
         // update gameStage in db from waiting to playing
-        // emit 'start game' event and send the game instance obj
+        return queries.setGameInstanceGameStageToPlaying(gameName)
+        .then(function () {
+          return queries.retrieveGameInstance(gameName)
+          .then(function (game) {
+          // emit 'start game' event and send the game instance obj
+            io.to(gameName).emit('start game', game);
+          })
+        });
+      } 
+    }).catch(function(error) {
+      console.log(error)
+      throw error;
+    })
   })
 
   //TODO: write a helper function that retrieves a game instance obj given a name
