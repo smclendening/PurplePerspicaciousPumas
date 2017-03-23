@@ -6,8 +6,12 @@ module.exports.retrieveGameInstance = function(gameName) {
   return games.findOne({gameName: gameName});
 };
 
-module.exports.AddPlayerToGameInstance = function(players) {
+module.exports.addPlayerToGameInstance = function(gameName, players) {
 
   return games.update({gameName: gameName}, {players: players});
 };
 
+module.exports.setGameInstanceGameStageToPlaying = function(gameName) {
+
+  return games.update({gameName: gameName}, {gameStage: 'playing'});
+};
