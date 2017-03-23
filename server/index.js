@@ -92,7 +92,12 @@ var server = app.listen(port, function() {
 var io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('a user connected to the socket');
+
+  socket.on('join game', function(data) {
+    console.log('client joining room: ', data);
+    socket.join(data);
+  })
 
   socket.on('disconnect', () => {
     console.log('a user disconnected');

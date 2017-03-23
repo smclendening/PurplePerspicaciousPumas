@@ -2,6 +2,7 @@ import React from 'react';
 import WaitingRoom from './WaitingRoom.jsx';
 import PlayingGame from './PlayingGame.jsx';
 import $ from 'jquery';
+import io from 'socket.io-client';
 
 class Game extends React.Component {
   constructor(props) {
@@ -16,6 +17,10 @@ class Game extends React.Component {
 
   componentDidMount() {
     this.getGameData(this.props.params.gamename);
+    console.log('join the socket');
+    const socket = io();
+
+    socket.emit('join game', this.props.params.gamename);
   }
 
   getGameData(gameName) {
