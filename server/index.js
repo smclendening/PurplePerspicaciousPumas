@@ -114,7 +114,7 @@ io.on('connection', (socket) => {
           return queries.retrieveGameInstance(gameName)
           .then(function (game) {
           // emit 'start game' event and send the game instance obj
-            socket.emit('start game', game);
+            io.to(gameName).emit('start game', game);
           })
         });
       } 
