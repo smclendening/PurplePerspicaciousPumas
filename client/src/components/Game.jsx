@@ -89,7 +89,7 @@ class Game extends React.Component {
         <h4>Game!</h4>
         {this.props.params.gamename}
         {this.state.game && this.state.game.gameStage === 'waiting' && <WaitingRoom numPlayers={this.state.game.players.length} players={this.state.game.players}/>}
-        {this.state.game && this.state.user && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.user} handleResponse={this.handleResponse}/>}
+        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse}/>}
       </div>
     )
   }
