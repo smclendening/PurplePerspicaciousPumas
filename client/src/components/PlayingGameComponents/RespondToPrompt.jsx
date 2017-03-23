@@ -20,7 +20,7 @@ class RespondToPrompt extends React.Component {
     return (
       <div id="choose-username">
           <b>Player Response: </b><input type="text" value={this.state.value} onChange={this.handleInputChange} />
-          <button>Submit</button>
+          <button onClick={() => this.props.onSubmit(this.state.response)}>Submit</button>
       </div>
     )
   }

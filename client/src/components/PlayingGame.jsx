@@ -54,7 +54,7 @@ class PlayingGame extends React.Component{
         </div>
         <div>
         {stage === 0 && this.state.role === 'judge' && <PlayersResponding />}
-        {stage === 0 && this.state.role === 'player' && <RespondToPrompt />}
+        {stage === 0 && this.state.role === 'player' && <RespondToPrompt onSubmit={this.props.handleResponse}/>}
         {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} onClick={this.handleJudgeSelection}/>}
         {stage === 1 && this.state.role === 'player' && <SeeResponses responses={responses}/>}
         {stage === 2 && <Winner responses={responses} winner={winner}/>}
