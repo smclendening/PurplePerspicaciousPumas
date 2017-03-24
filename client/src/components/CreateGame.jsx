@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class CreateGame extends React.Component {
   constructor(props) {
@@ -10,8 +11,33 @@ class CreateGame extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({
-      gameName: event.target.value
+    this.setState({gameName: event.target.value});
+  }
+
+  addGameToDB(gameName, callback) {
+    var gameInstance = {
+      gameName: gameName,
+      password: '',
+      players: [this.props.username],
+      rounds: [
+      {prompt: 'prompt 1', responses: [], winner: '', stage: 0, ready: []}, 
+      {prompt: 'prompt 2', responses: [], winner: '', stage: 0, ready: []}, 
+      {prompt: 'prompt 3', responses: [], winner: '', stage: 0, ready: []}, 
+      {prompt: 'prompt 4', responses: [], winner: '', stage: 0, ready: []}],
+      currentRound: 0
+    }
+
+    $.ajax({
+      url: 'http://localhost:3000/games',
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      data: JSON.stringify(gameInstance),
+      success: (data) => {
+        callback(gameName);
+      },
+      error: (err) => {
+        console.log('error in login POST: ', err);
+      }
     });
   }
 
@@ -20,7 +46,7 @@ class CreateGame extends React.Component {
       <div id="choose-username">
         <h4>Start a New Game</h4>
           <input placeholder="Start a new game..." type="text" value={this.state.gameName} onChange={this.handleChange} />
-          <button onClick={() => this.props.onClick(this.state.gameName)}>Submit</button>
+          <button onClick={() => this.addGameToDB(this.state.gameName, this.props.onClick)}>Submit</button>
       </div>
     )
   }

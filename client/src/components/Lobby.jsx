@@ -46,7 +46,6 @@ class Lobby extends React.Component {
       headers: {'content-type': 'application/json'},
       success: (username) => {
         this.setState({username: username});
-        console.log('got username in Lobby: ', username);
       },
       error: (err) => {
         console.log('error getting username', err);
@@ -60,7 +59,7 @@ class Lobby extends React.Component {
         <h3>Lobby</h3>
         <h4>Games:</h4>
         {this.state.games && <GameList games={this.state.games} onClick={this.props.route.sendToGame}/>}
-        {this.state.username && <CreateGame onClick={this.props.route.sendToGame}/>}
+        {this.state.username && <CreateGame username = {this.state.username} onClick={this.props.route.sendToGame}/>}
       </div>
     )
   }
