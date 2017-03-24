@@ -99,11 +99,12 @@ class Game extends React.Component {
   }
 
   handleJudgeSelection(winner) {
-    console.log(winner);
     socket.emit('judge selection', {gameName: this.props.params.gamename, winner: winner});
+  }
 
   handleReadyToMoveOn() {
-    socket.emit('ready to move on', {gameName: this.props.params.gamename, username: this.state.username});
+    console.log('ready to move on!');
+    //socket.emit('ready to move on', {gameName: this.props.params.gamename, username: this.state.username});
   }
 
   render() {
