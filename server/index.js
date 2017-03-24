@@ -228,14 +228,14 @@ io.on('connection', (socket) => {
         .then(function() {
           if (Rounds[currentRound].ready.length === 4) {
             currentRound++;
-          }
-          queries.updateCurrentRound(gameName, currentRound)
-          .then(function() {
-            queries.retrieveGameInstance(gameName)
-            .then(function(game) {
-              io.to(gameName).emit('start next round', game);
+            queries.updateCurrentRound(gameName, currentRound)
+            .then(function() {
+              queries.retrieveGameInstance(gameName)
+              .then(function(game) {
+                io.to(gameName).emit('start next round', game);
+              })
             })
-          })
+          }
         })
       }
     }).catch(function(error) {
