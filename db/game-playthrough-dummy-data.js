@@ -5,7 +5,7 @@ var gameInstance = models.gameInstanceModel;
 module.exports.PurplePumaWaiting1 = {
 	gameName: 'Purple-Puma-One-Player',
 	password: '',
-	players: ['Edward K. Chan'],
+	players: [],
 	rounds: [
 	{prompt: 'prompt 1', responses: [], winner: '', stage: 0, ready: []}, 
 	{prompt: 'prompt 2', responses: [], winner: '', stage: 0, ready: []}, 
