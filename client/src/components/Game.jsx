@@ -19,6 +19,9 @@ class Game extends React.Component {
     this.handleJudgeSelection = this.handleJudgeSelection.bind(this);
     this.handleReadyToMoveOn = this.handleReadyToMoveOn.bind(this);
 
+    socket.on('update waiting room', (gameObj) => {
+      this.setState({game: gameObj});
+    })
     socket.on('start game', (gameObj) => {
       this.setState({game: gameObj});
     })
@@ -110,7 +113,7 @@ class Game extends React.Component {
       <div id="game">
         <h4>Game!</h4>
         {this.props.params.gamename}
-        {this.state.game && this.state.game.gameStage === 'waiting' && <WaitingRoom numPlayers={this.state.game.players.length} players={this.state.game.players}/>}
+        {this.state.game && this.state.username && this.state.game.gameStage === 'waiting' && <WaitingRoom players={this.state.game.players} user={this.state.username}/>}
         {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse} handleJudgeSelection={this.handleJudgeSelection} handleReadyToMoveOn={this.handleReadyToMoveOn}/>}
       </div>
     )
