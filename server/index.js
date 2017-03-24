@@ -234,8 +234,13 @@ io.on('connection', (socket) => {
           }
 
           queries.updateCurrentRound(gameName, currentRound)
+          .then(function() {
+            queries.retrieveGameInstance(gameName)
+            .then(function(game) {
+              io.to(gameName).emit('start next round', game);
+            })
+          })
         })
-
       }
     }).catch(function(error) {
       console.log(error);
