@@ -218,27 +218,21 @@ io.on('connection', (socket) => {
   socket.on('ready to move on', (data) => {
     let gameName = data.gameName;
     let username = data.username;
-    console.log('1');
     queries.retrieveGameInstance(gameName)
     .then(function(game) {
       let currentRound = game.currentRound;
       let Rounds = game.rounds.slice(0);
-    console.log('2');
       if (!Rounds[currentRound].ready.includes(username)) {
         Rounds[currentRound].ready.push(username);
         queries.updateRounds(gameName, Rounds)
         .then(function() {
-    console.log('3');
           if (Rounds[currentRound].ready.length === 4) {
             currentRound++;
           }
-    console.log('4');
           queries.updateCurrentRound(gameName, currentRound)
           .then(function() {
-                console.log('5');
             queries.retrieveGameInstance(gameName)
             .then(function(game) {
-                  console.log('6');
               io.to(gameName).emit('start next round', game);
             })
           })
