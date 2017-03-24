@@ -42,8 +42,8 @@ class Lobby extends React.Component {
       <div id="lobby">
         <h3>Lobby</h3>
         <h4>Games:</h4>
-        {this.state.games && <GameList games={this.state.games} onClick={this.props.route.sendToGame}/>}
-        <CreateGame onClick={this.props.route.sendToGame}/>
+        {this.state.games && <GameList games={this.state.games} sendToGame={this.props.route.sendToGame}/>}
+        <CreateGame sendToGame={this.props.route.sendToGame}/>
       </div>
     )
   }
