@@ -100,8 +100,6 @@ io.on('connection', (socket) => {
         let players = game.players.slice(0);
         players.push(username);
         return queries.addPlayerToGameInstance(gameName, players);
-      } else {
-        next()
       }
     }).then(function () {
       return queries.retrieveGameInstance(gameName);

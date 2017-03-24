@@ -17,6 +17,7 @@ class Game extends React.Component {
     this.getGameData = this.getGameData.bind(this);
     this.getUsername = this.getUsername.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
+    this.handleJudgeSelection = this.handleJudgeSelection.bind(this);
 
     socket.on('start game', (gameObj) => {
       context.setState({game: gameObj});
@@ -89,13 +90,18 @@ class Game extends React.Component {
     socket.emit('submit response', {gameName: this.props.params.gamename, username: this.state.username, response: response});
   }
 
+  handleJudgeSelection(winner) {
+    console.log(winner);
+    socket.emit('judge selection', {gameName: this.props.params.gamename, winner: winner});
+  }
+
   render() {
     return (
       <div id="game">
         <h4>Game!</h4>
         {this.props.params.gamename}
         {this.state.game && this.state.game.gameStage === 'waiting' && <WaitingRoom numPlayers={this.state.game.players.length} players={this.state.game.players}/>}
-        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse}/>}
+        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse} handleJudgeSelection={this.handleJudgeSelection}/>}
       </div>
     )
   }
