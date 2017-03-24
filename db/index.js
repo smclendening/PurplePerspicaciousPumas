@@ -87,7 +87,7 @@ gameFour.save(function (err, game) {
 	}
 });
 
-for (game in dummyGamePlayThrough) {
+for (let game in dummyGamePlayThrough) {
 	let newGame = new gameInstanceModel(dummyGamePlayThrough[game]);
 	newGame.save(function (err, game) {
 		if (err) {
