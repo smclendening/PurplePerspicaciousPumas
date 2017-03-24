@@ -19,20 +19,7 @@ class App extends React.Component {
     }
 
     handleSignUp(email, username, password) {
-      $.ajax({
-        url: 'http://localhost:3000/signup',
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        data: JSON.stringify({'username': username, 'email': email, 'password': password}),
-        success: (data) => {
-          console.log('added user to users DB');
-          console.log(data);
-          hashHistory.push('/lobby');
-        },
-        error: (err) => {
-            console.log('error in username POST: ', err);
-        }
-      });
+      hashHistory.push('/lobby');
     }
 
     handleLogIn() {
@@ -40,7 +27,6 @@ class App extends React.Component {
     }
 
     sendToGame(gameName) {
-      console.log(gameName);
       hashHistory.push(/game/ + gameName);
     }
 
@@ -48,7 +34,7 @@ class App extends React.Component {
       return (
         <div>
           <Router history={hashHistory}>
-            <Route path="/" component={Home} onSignUp={this.handleSignUp} handleLogIn={this.handleLogIn}/>
+            <Route path="/" component={Home} handleSignUp={this.handleSignUp} handleLogIn={this.handleLogIn}/>
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame}/>
             <Route path="/game/:gamename" component={Game} />
           </Router>
