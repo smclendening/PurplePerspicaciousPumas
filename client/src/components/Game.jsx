@@ -103,8 +103,7 @@ class Game extends React.Component {
   }
 
   handleReadyToMoveOn() {
-    console.log('ready to move on!');
-    //socket.emit('ready to move on', {gameName: this.props.params.gamename, username: this.state.username});
+    socket.emit('ready to move on', {gameName: this.props.params.gamename, username: this.state.username});
   }
 
   render() {
