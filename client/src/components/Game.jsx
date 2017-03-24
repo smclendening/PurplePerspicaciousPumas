@@ -31,6 +31,9 @@ class Game extends React.Component {
     socket.on('start next round', (gameObj) => {
       context.setState({game: gameObj});
     })
+    socket.on('game over', (gameObj) => {
+      context.setState({game: gameObj});
+    })
 
   }
 
