@@ -13,48 +13,15 @@ class App extends React.Component {
       super(props);
       this.state = {}
 
-      this.handleSignUp = this.handleSignUp.bind(this);
-      this.handleLogIn = this.handleLogIn.bind(this);
       this.sendToGame = this.sendToGame.bind(this);
+      this.sendToLobby = this.sendToLobby.bind(this);
     }
 
-    handleSignUp(email, username, password) {
-      $.ajax({
-        url: 'http://localhost:3000/signup',
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        data: JSON.stringify({'username': username, 'email': email, 'password': password}),
-        success: (data) => {
-          console.log('added user to users DB');
-          console.log(data);
-          hashHistory.push('/lobby');
-        },
-        error: (err) => {
-            console.log('error in username POST: ', err);
-        }
-      });
-    }
-
-    handleLogIn(username, password) {
-      console.log(username, password);
-      $.ajax({
-        url: 'http://localhost:3000/login',
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        data: JSON.stringify({'username': username, 'password': password}),
-        success: (data) => {
-          console.log('added user to users DB');
-          console.log(data);
-          hashHistory.push('/lobby');
-        },
-        error: (err) => {
-            console.log('error in login POST: ', err);
-        }
-      });
+    sendToLobby() {
+      hashHistory.push('/lobby');
     }
 
     sendToGame(gameName) {
-      console.log(gameName);
       hashHistory.push(/game/ + gameName);
     }
 
@@ -62,7 +29,7 @@ class App extends React.Component {
       return (
         <div>
           <Router history={hashHistory}>
-            <Route path="/" component={Home} onSignUp={this.handleSignUp} onLogIn={this.handleLogIn}/>
+            <Route path="/" component={Home} sendToLobby={this.sendToLobby} handleSignUp={this.handleSignUp} handleLogIn={this.handleLogIn}/>
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame}/>
             <Route path="/game/:gamename" component={Game} />
           </Router>
