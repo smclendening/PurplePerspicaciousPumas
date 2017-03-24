@@ -18,7 +18,7 @@ class CreateGame extends React.Component {
     var gameInstance = {
       gameName: gameName,
       password: '',
-      players: [this.props.username],
+      players: [],
       rounds: [
       {prompt: 'prompt 1', responses: [], winner: '', stage: 0, ready: []}, 
       {prompt: 'prompt 2', responses: [], winner: '', stage: 0, ready: []}, 

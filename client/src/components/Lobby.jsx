@@ -14,12 +14,10 @@ class Lobby extends React.Component {
       username: null
     }
     this.getGames = this.getGames.bind(this);
-    this.getUsername = this.getUsername.bind(this);
   }
 
   componentDidMount() {
     this.getGames();
-    this.getUsername();
   }
 
   getGames() {
@@ -39,27 +37,13 @@ class Lobby extends React.Component {
     });
   }
 
-  getUsername() {
-    $.ajax({
-      url: 'http://localhost:3000/username',
-      method: 'GET',
-      headers: {'content-type': 'application/json'},
-      success: (username) => {
-        this.setState({username: username});
-      },
-      error: (err) => {
-        console.log('error getting username', err);
-      }
-    });
-  }
-
   render() {
     return (
       <div id="lobby">
         <h3>Lobby</h3>
         <h4>Games:</h4>
         {this.state.games && <GameList games={this.state.games} onClick={this.props.route.sendToGame}/>}
-        {this.state.username && <CreateGame username = {this.state.username} onClick={this.props.route.sendToGame}/>}
+        <CreateGame onClick={this.props.route.sendToGame}/>
       </div>
     )
   }
