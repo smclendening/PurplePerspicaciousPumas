@@ -40,7 +40,7 @@ class SignUp extends React.Component {
       headers: {'content-type': 'application/json'},
       data: JSON.stringify({'username': username, 'email': email, 'password': password}),
       success: (data) => {
-        this.props.handleSignUp();
+        this.props.sendToLobby();
       },
       error: (err) => {
         this.setState({error: true});

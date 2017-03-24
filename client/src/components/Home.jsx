@@ -6,8 +6,8 @@ import LogIn from './LogIn.jsx';
 
 const Home = (props) => (
   <div id="home">
-    <SignUp handleSignUp={props.route.handleSignUp}/>
-    <LogIn handleLogIn={props.route.handleLogIn} />
+    <SignUp sendToLobby={props.route.sendToLobby}/>
+    <LogIn sendToLobby={props.route.sendToLobby} />
   </div>
 )
 

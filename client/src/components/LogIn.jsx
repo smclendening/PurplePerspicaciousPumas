@@ -33,7 +33,7 @@ class LogIn extends React.Component {
       headers: {'content-type': 'application/json'},
       data: JSON.stringify({'username': username, 'password': password}),
       success: () => {
-        this.props.handleLogIn();
+        this.props.sendToLobby();
       },
       error: (err) => {
         this.setState({error: true});

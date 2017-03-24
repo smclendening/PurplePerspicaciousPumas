@@ -13,16 +13,11 @@ class App extends React.Component {
       super(props);
       this.state = {}
 
-      this.handleSignUp = this.handleSignUp.bind(this);
-      this.handleLogIn = this.handleLogIn.bind(this);
       this.sendToGame = this.sendToGame.bind(this);
+      this.sendToLobby = this.sendToLobby.bind(this);
     }
 
-    handleSignUp(email, username, password) {
-      hashHistory.push('/lobby');
-    }
-
-    handleLogIn() {
+    sendToLobby() {
       hashHistory.push('/lobby');
     }
 
@@ -34,7 +29,7 @@ class App extends React.Component {
       return (
         <div>
           <Router history={hashHistory}>
-            <Route path="/" component={Home} handleSignUp={this.handleSignUp} handleLogIn={this.handleLogIn}/>
+            <Route path="/" component={Home} sendToLobby={this.sendToLobby} handleSignUp={this.handleSignUp} handleLogIn={this.handleLogIn}/>
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame}/>
             <Route path="/game/:gamename" component={Game} />
           </Router>
