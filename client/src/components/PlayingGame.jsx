@@ -22,13 +22,28 @@ class PlayingGame extends React.Component{
     this.getRole();
   }
 
-  getRole() {
-    var curRound = this.props.game.currentRound;
-    
-    if (this.props.game.players[curRound] === this.props.user) {
-      this.setState({role: 'judge'})
+  componentWillReceiveProps(nextProps) {
+    this.getRole(nextProps);
+  }
+
+  getRole(nextProps) {
+
+    if (nextProps) {
+      let curRound = nextProps.game.currentRound;
+      
+      if (nextProps.game.players[curRound] === nextProps.user) {
+        this.setState({role: 'judge'})
+      } else {
+        this.setState({role: 'player'})
+      }
     } else {
-      this.setState({role: 'player'})
+      let curRound = this.props.game.currentRound;
+      
+      if (this.props.game.players[curRound] === this.props.user) {
+        this.setState({role: 'judge'})
+      } else {
+        this.setState({role: 'player'})
+      }
     }
   }
 
