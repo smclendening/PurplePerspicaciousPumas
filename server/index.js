@@ -170,6 +170,37 @@ io.on('connection', (socket) => {
       // emit 'start judging' with game instance obj as data
 
   // on 'judge selection'
+  socket.on('judge selection', (data) => {
+    let gameName = data.gameName;
+    let winner = data.winner;
+    console.log('judge selection', data.winner);
+    queries.retrieveGameInstance(gameName)
+    .then(function (game) {
+      let currentRound = game.currentRound;
+      let currentResponses = game.rounds[currentRound].responses;
+      let Rounds = game.rounds.slice(0);
+      Rounds[currentRound].winner = winner;
+      Rounds[currentRound].stage++;
+      console.log('rounds', Rounds);
+      queries.updateRounds(gameName, Rounds)
+      .then(function () {
+        console.log('gameName', gameName);
+        queries.retrieveGameInstance(gameName)
+        .then(function (game) {
+            if (game.currentRound < 3) {
+              console.log('winner');
+              io.to(gameName).emit('winner chosen', game);
+            } else {
+              console.log('game over');
+              io.to(gameName).emit('game over', game);
+            }
+          })
+        })
+    }).catch(function(error) {
+      console.log(error);
+      throw error;
+    })
+  })
     // update game instance obj
       // at currentRounds in rounds array, set winner to be the username (given as data)
       // in same round, increment stage by 1 
