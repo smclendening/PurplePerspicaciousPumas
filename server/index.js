@@ -64,7 +64,11 @@ app.get('/games', function(req, res) {
 });
 
 app.post('/games', function(req, res) {
-  Game.create(req.body, function(err) {
+  var gameInstance = req.body;
+
+  helpers.addPrompts(gameInstance);
+
+  Game.create(gameInstance, function(err) {
     if (err) {
       res.status(400).send(err);
     } else {
