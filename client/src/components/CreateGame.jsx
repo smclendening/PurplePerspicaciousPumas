@@ -6,6 +6,7 @@ class CreateGame extends React.Component {
     this.state = {
       gameName: ''
     }
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
@@ -17,8 +18,8 @@ class CreateGame extends React.Component {
   render() {
     return (
       <div id="choose-username">
-        <h4>Create a New Account</h4>
-          <input placeholder="Create a new game..." type="text" value={this.state.gameName} onChange={this.handleChange} />
+        <h4>Start a New Game</h4>
+          <input placeholder="Start a new game..." type="text" value={this.state.gameName} onChange={this.handleChange} />
           <button onClick={() => this.props.onClick(this.state.gameName)}>Submit</button>
       </div>
     )
