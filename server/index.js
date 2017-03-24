@@ -116,7 +116,10 @@ io.on('connection', (socket) => {
             io.to(gameName).emit('start game', game);
           })
         });
-      } 
+      } else {
+        console.log('joined, game: ', game);
+        io.to(gameName).emit('update waiting room', game);
+      }
     }).catch(function(error) {
       console.log(error)
       throw error;
