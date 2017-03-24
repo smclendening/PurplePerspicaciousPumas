@@ -21,6 +21,9 @@ class Game extends React.Component {
     socket.on('start game', (gameObj) => {
       context.setState({game: gameObj});
     })
+    socket.on('start judging', (gameObj) => {
+      context.setState({game: gameObj});
+    })
   }
 
   componentDidMount() {
