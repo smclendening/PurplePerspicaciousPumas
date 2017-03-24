@@ -7,7 +7,7 @@ import LogIn from './LogIn.jsx';
 const Home = (props) => (
   <div id="home">
     <SignUp onSubmit={props.route.onSignUp}/>
-    <LogIn onSubmit={props.route.onLogIn} />
+    <LogIn onLogIn={props.route.onLogIn} />
   </div>
 )
 

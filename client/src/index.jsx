@@ -35,22 +35,8 @@ class App extends React.Component {
       });
     }
 
-    handleLogIn(username, password) {
-      console.log(username, password);
-      $.ajax({
-        url: 'http://localhost:3000/login',
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        data: JSON.stringify({'username': username, 'password': password}),
-        success: (data) => {
-          console.log('added user to users DB');
-          console.log(data);
-          hashHistory.push('/lobby');
-        },
-        error: (err) => {
-            console.log('error in login POST: ', err);
-        }
-      });
+    handleLogIn() {
+      hashHistory.push('/lobby');
     }
 
     sendToGame(gameName) {
