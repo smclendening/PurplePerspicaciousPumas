@@ -48,7 +48,7 @@ class App extends React.Component {
       return (
         <div>
           <Router history={hashHistory}>
-            <Route path="/" component={Home} onSignUp={this.handleSignUp} onLogIn={this.handleLogIn}/>
+            <Route path="/" component={Home} onSignUp={this.handleSignUp} handleLogIn={this.handleLogIn}/>
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame}/>
             <Route path="/game/:gamename" component={Game} />
           </Router>

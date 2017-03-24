@@ -26,15 +26,14 @@ class LogIn extends React.Component {
     });
   }
 
-  handleLogIn(username, password) {
-    console.log(username, password);
+  handleLogInAttempt(username, password) {
     $.ajax({
       url: 'http://localhost:3000/login',
       method: 'POST',
       headers: {'content-type': 'application/json'},
       data: JSON.stringify({'username': username, 'password': password}),
       success: () => {
-        this.props.onLogIn();
+        this.props.handleLogIn();
       },
       error: (err) => {
         this.setState({error: true});
@@ -52,7 +51,7 @@ class LogIn extends React.Component {
           {this.state.error && errorMessage}
           <input placeholder="Choose a username..." type="text" value={this.state.username} onChange={this.handleUsernameChange} />
           <input placeholder="Choose a password..." type="text" value={this.state.password} onChange={this.handlePasswordChange} />
-          <button onClick={() => this.handleLogIn(this.state.username, this.state.password)}>Submit</button>
+          <button onClick={() => this.handleLogInAttempt(this.state.username, this.state.password)}>Submit</button>
       </div>
     )
   }
