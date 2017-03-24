@@ -8,7 +8,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var User = models.userModel;
 var Game = models.gameInstanceModel;
-var queries = require('../db/db-queries.js')
+var queries = require('../db/db-queries.js');
+var helpers = require('./helpers.js');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -132,7 +133,37 @@ io.on('connection', (socket) => {
     // then check that username does not exist as index[1] of a response in responses array
       // if username doesn't exist yet, then add response to DB
   socket.on('submit response', (data) => {
-    
+    let gameName = data.gameName;
+    let username = data.username;
+    let response = data.response;
+
+    queries.retrieveGameInstance(gameName)
+    .then(function(game) {
+      let currentRound = game.currentRound;
+      let currentResponses = game.rounds[currentRound].responses;
+      let currentRounds = game.rounds;
+
+      if (!helpers.userAlreadySubmitted(username, currentResponses)) {
+        currentRounds[currentRound].responses.push([response, username]);
+
+        if (currentRounds[currentRound].responses.length === 3) {
+          currentRounds[currentRound].stage++;
+        }
+        //update rounds property of the game in DB w/ new responses and stage
+        return queries.updateRounds(gameName, currentRounds)
+        .then(function() {
+          if (currentRounds[currentRound].responses.length === 3) {
+            return queries.retrieveGameInstance(gameName)
+            .then(function(game) {
+              io.to(gameName).emit('start judging', game);
+            })
+          }
+        })
+      }
+    }).catch(function(error) {
+      console.log(error);
+      throw error;
+    })
   })
 
     // check if there are 3 responses

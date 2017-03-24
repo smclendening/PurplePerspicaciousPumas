@@ -15,3 +15,8 @@ module.exports.setGameInstanceGameStageToPlaying = function(gameName) {
 
   return games.update({gameName: gameName}, {gameStage: 'playing'});
 };
+
+module.exports.updateRounds = function(gameName, roundsArray) {
+
+  return games.update({gameName: gameName}, {rounds: roundsArray});
+}
