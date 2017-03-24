@@ -216,6 +216,7 @@ io.on('connection', (socket) => {
       // if there are now 4 ready, increment currentRound by 1 
       // emit 'start next round' with game instance obj
   socket.on('ready to move on', (data) => {
+    console.log('rdy');
     let gameName = data.gameName;
     let username = data.username;
     queries.retrieveGameInstance(gameName)
@@ -226,6 +227,7 @@ io.on('connection', (socket) => {
         Rounds[currentRound].ready.push(username);
         queries.updateRounds(gameName, Rounds)
         .then(function() {
+          console.log('rounds', Rounds);
           if (Rounds[currentRound].ready.length === 4) {
             currentRound++;
             queries.updateCurrentRound(gameName, currentRound)
