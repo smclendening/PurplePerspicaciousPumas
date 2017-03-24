@@ -46,7 +46,7 @@ class CreateGame extends React.Component {
       <div id="choose-username">
         <h4>Start a New Game</h4>
           <input placeholder="Start a new game..." type="text" value={this.state.gameName} onChange={this.handleChange} />
-          <button onClick={() => this.addGameToDB(this.state.gameName, this.props.onClick)}>Submit</button>
+          <button onClick={() => this.addGameToDB(this.state.gameName, this.props.sendToGame)}>Submit</button>
       </div>
     )
   }
