@@ -4,7 +4,6 @@ import PlayingGame from './PlayingGame.jsx';
 import $ from 'jquery';
 import io from 'socket.io-client';
 const socket = io();
-const context = this;
 
 class Game extends React.Component {
   constructor(props) {
@@ -21,19 +20,19 @@ class Game extends React.Component {
     this.handleReadyToMoveOn = this.handleReadyToMoveOn.bind(this);
 
     socket.on('start game', (gameObj) => {
-      context.setState({game: gameObj});
+      this.setState({game: gameObj});
     })
     socket.on('start judging', (gameObj) => {
-      context.setState({game: gameObj});
+      this.setState({game: gameObj});
     })
     socket.on('winner chosen', (gameObj) => {
-      context.setState({game: gameObj});
+      this.setState({game: gameObj});
     })
     socket.on('start next round', (gameObj) => {
-      context.setState({game: gameObj});
+      this.setState({game: gameObj});
     })
     socket.on('game over', (gameObj) => {
-      context.setState({game: gameObj});
+      this.setState({game: gameObj});
     })
 
   }
