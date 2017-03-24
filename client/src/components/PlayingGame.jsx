@@ -6,6 +6,7 @@ import SeeResponses from './PlayingGameComponents/SeeResponses.jsx';
 import Winner from './PlayingGameComponents/Winner.jsx'
 import RespondToPrompt from './PlayingGameComponents/RespondToPrompt.jsx';
 import ChooseWinner from './PlayingGameComponents/ChooseWinner.jsx';
+import Score from './PlayingGameComponents/Score.jsx';
 // this.props.game = game instance object
 
 class PlayingGame extends React.Component{
@@ -59,6 +60,7 @@ class PlayingGame extends React.Component{
       <div id="playing-game">
         <h2>Playing Game</h2>
         <div>
+          <Score game={this.props.game}/>
           <CurrentJudge judge={curJudge} />
           <Prompt prompt={curPrompt}/>
         </div>
