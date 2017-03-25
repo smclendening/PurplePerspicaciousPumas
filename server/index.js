@@ -39,7 +39,7 @@ app.post('/signup', function (req, res) {
       console.log(err);
       return res.status(400).send(err);
     } 
-
+    console.log('registered User');
     passport.authenticate('local')(req, res, function() {
       console.log('success', user);
       res.status(201).send('created');
