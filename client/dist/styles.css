@@ -1,0 +1,11 @@
+body {
+  background-color: #ffad33;
+/*  align-items: center;
+  justify-content: center;*/
+/*  display: flex;
+*/}
+
+#signup-header, #login-header {
+  text-align: center;
+}
+
