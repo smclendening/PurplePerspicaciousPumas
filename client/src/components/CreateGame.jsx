@@ -28,7 +28,7 @@ class CreateGame extends React.Component {
     }
 
     $.ajax({
-      url: 'https://orange-to-orange-staging.herokuapp.com/games',
+      url: 'http://localhost:3000/games',
       method: 'POST',
       headers: {'content-type': 'application/json'},
       data: JSON.stringify(gameInstance),
