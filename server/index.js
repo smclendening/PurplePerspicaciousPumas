@@ -33,7 +33,7 @@ passport.deserializeUser(User.deserializeUser());
 // mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
 
 app.post('/signup', function (req, res) {
-  console.log('User tried to sign up,' req.body.username);
+  console.log('User tried to sign up', req.body.username);
   User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function (err, user) {
     if (err) {
       console.log(err);
