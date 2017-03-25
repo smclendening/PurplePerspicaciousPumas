@@ -12,3 +12,8 @@ body {
 #create-game {
   align-items: center;
 }
+
+#prompt {
+  font-size: 18px;
+  
+}

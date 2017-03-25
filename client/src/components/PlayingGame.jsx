@@ -59,21 +59,21 @@ class PlayingGame extends React.Component{
 
     return (
       <Col id="playing-game">
-        <PageHeader>{this.props.game.gameName}: <small>Round {this.props.game.currentRound + 1}</small></PageHeader>
-        <div>
+        <PageHeader>{this.props.game.gameName}: <small>Round {this.props.game.currentRound + 1} - Judge: {curJudge}</small></PageHeader>
           <Col sm={6} smOffset={3}>
+            <h4>Scoreboard</h4>
             <Score game={this.props.game}/>
           </Col>
-          <CurrentJudge judge={curJudge} />
-          <Prompt prompt={curPrompt}/>
-        </div>
-        <div>
+          <Col sm={8} smOffset={2}>
+            <Prompt prompt={curPrompt}/>
+          </Col>
+        <Col sm={6} smOffset={3}>
         {stage === 0 && this.state.role === 'judge' && <PlayersResponding />}
         {stage === 0 && this.state.role === 'player' && <RespondToPrompt handleResponse={this.props.handleResponse}/>}
         {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} handleJudgeSelection={this.props.handleJudgeSelection}/>}
         {stage === 1 && this.state.role === 'player' && <SeeResponses responses={responses}/>}
         {stage === 2 && <Winner responses={responses} winner={winner} handleReadyToMoveOn={this.props.handleReadyToMoveOn}/>}
-        </div>
+        </Col>
       </Col>
     )
   }

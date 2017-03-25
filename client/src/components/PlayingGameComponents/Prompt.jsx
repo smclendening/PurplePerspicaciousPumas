@@ -1,9 +1,12 @@
 import React from 'react';
+import { Col, Panel } from 'react-bootstrap';
 
 const Prompt = (props) => (
-  <div id="prompt">
-    <b>Prompt: </b> {props.prompt}
-  </div>
+  <Col id="prompt">
+    <Panel>
+      <b>Prompt: </b>{props.prompt}
+    </Panel>
+  </Col>
 )
 
 
