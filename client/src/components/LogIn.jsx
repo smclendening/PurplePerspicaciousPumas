@@ -28,7 +28,7 @@ class LogIn extends React.Component {
 
   handleLogInAttempt(username, password) {
     $.ajax({
-      url: 'http://localhost:3000/login',
+      url: 'https://orange-to-orange-staging.herokuapp.com/login',
       method: 'POST',
       headers: {'content-type': 'application/json'},
       data: JSON.stringify({'username': username, 'password': password}),
