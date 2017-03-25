@@ -56,6 +56,7 @@ class SignUp extends React.Component {
     return (
       <Col id="sign-up" sm={6}>
         <h4 id="signup-header">Sign Up</h4>
+        {this.state.error && errorMessage}
         <FormGroup>
           <Form horizontal>
             <Col componentClass={ControlLabel} sm={2}>

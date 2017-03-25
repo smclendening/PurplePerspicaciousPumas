@@ -48,19 +48,11 @@ class LogIn extends React.Component {
 
     const errorMessage = <p>The username and password you entered did not match our records. Please double check and try again.</p>
 
-    // return (
-    //   <div id="log-in">
-    //     <h4>Log In to Existing Account</h4>
-    //       {this.state.error && errorMessage}
-    //       <input placeholder="Choose a username..." type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-    //       <input placeholder="Choose a password..." type="text" value={this.state.password} onChange={this.handlePasswordChange} />
-    //       <button onClick={() => this.handleLogInAttempt(this.state.username, this.state.password)}>Submit</button>
-    //   </div>
-    // )
 
     return (
       <Col id="log-in" sm={6}>
         <h4 id="login-header">Log In</h4>
+        {this.state.error && errorMessage}
         <FormGroup bsSize="small">
           <Form horizontal>
             <Col componentClass={ControlLabel} sm={2}>
