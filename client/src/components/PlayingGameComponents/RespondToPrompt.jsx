@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 class RespondToPrompt extends React.Component {
   constructor(props) {
@@ -18,19 +19,30 @@ class RespondToPrompt extends React.Component {
   }
 
   render() {
+
+    const responseForm = (
+      <Form inline>
+        <FormGroup controlId="formInlineResponse" bsSize="large">
+          <FormControl type="text" placeholder="Your Response..." onChange={this.handleInputChange} value={this.state.response}/>
+        </FormGroup>
+        {' '}
+        <Button onClick={() => {
+            this.setState({responded: true});
+            this.props.handleResponse(this.state.response);
+          }
+        }>
+          Submit
+        </Button>
+      </Form>
+    )
+
+
+
     return (
-      <div id="choose-username">
-          {!this.state.responded && <b>Submit Response:</b> && <input type="text" value={this.state.value} onChange={this.handleInputChange} />}
-          {!this.state.responded && <button onClick={() => {
-              console.log('this: ', this);
-              this.setState({
-                responded: true
-              })
-              this.props.handleResponse(this.state.response)
-            }
-          }>Submit</button>}
+      <Col id="submit-response">
+          {!this.state.responded && responseForm}
           {this.state.responded && <p><b>Your response has been submitted!</b></p>}
-      </div>
+      </Col>
     )
   }
 }

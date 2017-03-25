@@ -7,7 +7,8 @@ import Winner from './PlayingGameComponents/Winner.jsx'
 import RespondToPrompt from './PlayingGameComponents/RespondToPrompt.jsx';
 import ChooseWinner from './PlayingGameComponents/ChooseWinner.jsx';
 import Score from './PlayingGameComponents/Score.jsx';
-// this.props.game = game instance object
+import { Col, PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
+
 
 class PlayingGame extends React.Component{
   constructor(props) {
@@ -57,21 +58,23 @@ class PlayingGame extends React.Component{
     var winner = this.props.game.rounds[curRound].winner;
 
     return (
-      <div id="playing-game">
-        <h2>Playing Game</h2>
-        <div>
-          <Score game={this.props.game}/>
-          <CurrentJudge judge={curJudge} />
-          <Prompt prompt={curPrompt}/>
-        </div>
-        <div>
+      <Col id="playing-game">
+        <PageHeader>{this.props.game.gameName}: <small>Round {this.props.game.currentRound + 1} - Judge: {curJudge}</small></PageHeader>
+          <Col sm={6} smOffset={3}>
+            <h4>Scoreboard</h4>
+            <Score game={this.props.game}/>
+          </Col>
+          <Col sm={6} smOffset={3}>
+            <Prompt prompt={curPrompt}/>
+          </Col>
+        <Col sm={6} smOffset={3}>
         {stage === 0 && this.state.role === 'judge' && <PlayersResponding />}
         {stage === 0 && this.state.role === 'player' && <RespondToPrompt handleResponse={this.props.handleResponse}/>}
         {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} handleJudgeSelection={this.props.handleJudgeSelection}/>}
         {stage === 1 && this.state.role === 'player' && <SeeResponses responses={responses}/>}
         {stage === 2 && <Winner responses={responses} winner={winner} handleReadyToMoveOn={this.props.handleReadyToMoveOn}/>}
-        </div>
-      </div>
+        </Col>
+      </Col>
     )
   }
 }

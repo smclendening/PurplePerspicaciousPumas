@@ -1,9 +1,12 @@
 import React from 'react';
+import { Panel, Col } from 'react-bootstrap';
 
 const CurrentJudge = (props) => (
-  <div id="current-judge">
-    <b>Judge: </b> {props.judge}
-  </div>
+  <Col sm={6} smOffset={3} id="current-judge">
+    <Panel>
+      <b>Current Judge: </b> {props.judge}
+    </Panel>
+  </Col>
 )
 
 
