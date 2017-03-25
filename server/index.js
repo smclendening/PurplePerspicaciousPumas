@@ -210,7 +210,12 @@ io.on('connection', (socket) => {
               io.to(gameName).emit('winner chosen', game);
             } else {
               console.log('game over');
-              io.to(gameName).emit('game over', game);
+              queries.setGameInstanceGameStageToGameOver(gameName).then(function () {
+                queries.retrieveGameInstance(gameName).then(function (game) {
+                  console.log('gamemover', game);
+                  io.to(gameName).emit('game over', game);
+                })
+              })
             }
           })
         })
