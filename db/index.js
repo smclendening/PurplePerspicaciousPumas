@@ -46,7 +46,7 @@ var gameOne = new gameInstanceModel(dummyGames.gameOne)
 
 gameOne.save(function (err, game) {
 	if (err) {
-		console.log('error', error);
+		console.log('error', err);
 		return
 	} else {
 	// console.log('gameAdded', game);
@@ -58,7 +58,7 @@ var gameTwo = new gameInstanceModel(dummyGames.gameTwo)
 
 gameTwo.save(function (err, game) {
 	if (err) {
-		console.log('error', error);
+		console.log('error', err);
 		return
 	} else {
 	// console.log('gameAdded', game);
@@ -69,7 +69,7 @@ var gameThree = new gameInstanceModel(dummyGames.gameThree)
 
 gameThree.save(function (err, game) {
 	if (err) {
-		console.log('error', error);
+		console.log('error', err);
 		return
 	} else {
 	// console.log('gameAdded', game);
@@ -80,7 +80,7 @@ var gameFour = new gameInstanceModel(dummyGames.gameFour)
 
 gameFour.save(function (err, game) {
 	if (err) {
-		console.log('error', error);
+		console.log('error', err);
 		return
 	} else {
 	// console.log('gameAdded', game);
@@ -91,7 +91,7 @@ for (let game in dummyGamePlayThrough) {
 	let newGame = new gameInstanceModel(dummyGamePlayThrough[game]);
 	newGame.save(function (err, game) {
 		if (err) {
-			console.log('error', error);
+			console.log('error', err);
 			return
 		} else {
 		// console.log('gameAdded', game);
