@@ -22,7 +22,7 @@ class Lobby extends React.Component {
 
   getGames() {
     $.ajax({
-      url: 'https://orange-to-orange-staging.herokuapp.com/#/games',
+      url: 'http://orange-to-orange-staging.herokuapp.com/games',
       method: 'GET',
       headers: {'content-type': 'application/json'},
       success: (data) => {
