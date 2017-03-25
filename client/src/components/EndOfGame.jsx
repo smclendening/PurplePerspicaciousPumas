@@ -19,6 +19,7 @@ const EndOfGame = (props) => {
 	    <br />
 	    <RoundSummary round={props.game.rounds[0]} judge={props.game.players[0]}/>
 	    <br />
+	    <button onClick={props.sendToLobby}>Return to Lobby</button>
 	  </div>
 	)
 

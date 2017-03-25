@@ -31,7 +31,7 @@ class App extends React.Component {
           <Router history={hashHistory}>
             <Route path="/" component={Home} sendToLobby={this.sendToLobby} handleSignUp={this.handleSignUp} handleLogIn={this.handleLogIn}/>
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame}/>
-            <Route path="/game/:gamename" component={Game} />
+            <Route path="/game/:gamename" component={Game} sendToLobby={this.sendToLobby}/>
           </Router>
         </div>
       );
