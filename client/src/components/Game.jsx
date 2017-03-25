@@ -4,6 +4,8 @@ import PlayingGame from './PlayingGame.jsx';
 import EndOfGame from './EndOfGame.jsx';
 import $ from 'jquery';
 import io from 'socket.io-client';
+import { PageHeader } from 'react-bootstrap';
+
 const socket = io();
 
 class Game extends React.Component {
@@ -108,13 +110,12 @@ class Game extends React.Component {
   handleReadyToMoveOn() {
     socket.emit('ready to move on', {gameName: this.props.params.gamename, username: this.state.username});
   }
+        // {this.props.params.gamename}
 
   render() {
     return (
       <div id="game">
-        <h4>Game!</h4>
-        {this.props.params.gamename}
-        {this.state.game && this.state.username && this.state.game.gameStage === 'waiting' && <WaitingRoom players={this.state.game.players} user={this.state.username}/>}
+        {this.state.game && this.state.username && this.state.game.gameStage === 'waiting' && <WaitingRoom game={this.state.game} user={this.state.username}/>}
         {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse} handleJudgeSelection={this.handleJudgeSelection} handleReadyToMoveOn={this.handleReadyToMoveOn}/>}
         {this.state.game && this.state.username && this.state.game.gameStage === 'gameover' && <EndOfGame game={this.state.game} sendToLobby={this.props.route.sendToLobby}/>}
       </div>
