@@ -3,6 +3,8 @@ import GameList from './GameList.jsx';
 import $ from 'jquery';
 import CreateGame from './CreateGame.jsx';
 import YourGames from './YourGames.jsx';
+import { Button, Form, FormGroup, Col, FormControl, ControlLabel, PageHeader } from 'react-bootstrap';
+
 
 //TODO:
   // build logic to prevent users from joining a full game
@@ -55,14 +57,15 @@ class Lobby extends React.Component {
 
   render() {
     return (
-      <div id="lobby">
-        <h3>Lobby</h3>
-        <h4>Your Games:</h4>
-        {this.state.games && <YourGames games={this.state.games} username={this.state.username} sendToGame={this.props.route.sendToGame}/>}
-        <h4>Games:</h4>
-        {this.state.games && <GameList games={this.state.games} sendToGame={this.props.route.sendToGame}/>}
+
+      <Col id="lobby" sm={6} smOffset={3}>
+        <PageHeader>Lobby</PageHeader>
         <CreateGame sendToGame={this.props.route.sendToGame}/>
-      </div>
+        {this.state.games && <YourGames games={this.state.games} username={this.state.username} sendToGame={this.props.route.sendToGame}/>}
+        <h4>Current Games:</h4>
+        {this.state.games && <GameList games={this.state.games} sendToGame={this.props.route.sendToGame}/>}
+      </Col>
+      
     )
   }
 }
