@@ -35,7 +35,7 @@ class SignUp extends React.Component {
 
   handleSignUpAttempt(email, username, password) {
     $.ajax({
-      url: 'http://localhost:3000/signup',
+      url: 'https://orange-to-orange-staging.herokuapp.com/signup',
       method: 'POST',
       headers: {'content-type': 'application/json'},
       data: JSON.stringify({'username': username, 'email': email, 'password': password}),
