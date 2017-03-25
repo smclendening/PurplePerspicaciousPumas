@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import { Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -53,15 +54,62 @@ class SignUp extends React.Component {
     const errorMessage = <p>That username is already taken. Please try again with a different username.</p>
 
     return (
-      <div id="choose-username">
-        <h4>Create a New Account</h4>
-          {this.state.error && errorMessage}
-          <input placeholder="Email..." type="text" value={this.state.email} onChange={this.handleEmailChange} />
-          <input placeholder="Choose a username..." type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-          <input placeholder="Choose a password..." type="text" value={this.state.password} onChange={this.handlePasswordChange} />
-          <button onClick={() => this.handleSignUpAttempt(this.state.email, this.state.username, this.state.password)}>Submit</button>
-      </div>
+      <Col id="sign-up" sm={6}>
+        <h4 id="signup-header">Sign Up</h4>
+        <FormGroup>
+          <Form horizontal>
+            <Col componentClass={ControlLabel} sm={2}>
+              Email
+            </Col>
+            <Col sm={10}>
+              <FormControl type="email" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange} />
+            </Col>
+          </Form>
+        </FormGroup>
+
+        <FormGroup bsSize="small">
+          <Form horizontal>
+            <Col componentClass={ControlLabel} sm={2}>
+              Username
+            </Col>
+            <Col sm={10}>
+              <FormControl type="username" placeholder="Username" value={this.state.username} onChange={this.handleUsernameChange} />
+            </Col>
+          </Form>
+        </FormGroup>
+
+        <FormGroup bsSize="small">
+          <Form horizontal>
+            <Col componentClass={ControlLabel} sm={2}>
+              Password
+            </Col>
+            <Col sm={10}>
+              <FormControl type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange} />
+            </Col>
+          </Form>
+        </FormGroup>
+
+      <FormGroup bsSize="small">
+        <Col smOffset={2} sm={10}>
+          <Button type="submit" onClick={() => this.handleSignUpAttempt(this.state.email, this.state.username, this.state.password)}>
+            Sign in
+          </Button>
+        </Col>
+      </FormGroup>
+    </Col>
+
     )
+
+    // return (
+    //   <div id="signup-container">
+    //     <h4>Create a New Account</h4>
+    //       {this.state.error && errorMessage}
+    //       <input placeholder="Email..." type="text" value={this.state.email} onChange={this.handleEmailChange} />
+    //       <input placeholder="Choose a username..." type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+    //       <input placeholder="Choose a password..." type="text" value={this.state.password} onChange={this.handlePasswordChange} />
+    //       <Button bsStyle="primary" onClick={() => this.handleSignUpAttempt(this.state.email, this.state.username, this.state.password)}>Submit</Button> 
+    //   </div>
+    // )
   }
 }
 export default SignUp;
