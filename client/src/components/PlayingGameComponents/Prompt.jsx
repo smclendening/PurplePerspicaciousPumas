@@ -6,6 +6,7 @@ const Prompt = (props) => (
     <Panel>
       <b>Prompt: </b>{props.prompt}
     </Panel>
+    <br />
   </Col>
 )
 

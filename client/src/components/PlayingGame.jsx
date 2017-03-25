@@ -67,7 +67,7 @@ class PlayingGame extends React.Component{
           <Col sm={8} smOffset={2}>
             <Prompt prompt={curPrompt}/>
           </Col>
-        <Col sm={6} smOffset={3}>
+        <Col sm={8} smOffset={2}>
         {stage === 0 && this.state.role === 'judge' && <PlayersResponding />}
         {stage === 0 && this.state.role === 'player' && <RespondToPrompt handleResponse={this.props.handleResponse}/>}
         {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} handleJudgeSelection={this.props.handleJudgeSelection}/>}
