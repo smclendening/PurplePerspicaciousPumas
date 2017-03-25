@@ -24,3 +24,8 @@ module.exports.updateCurrentRound = function(gameName, round) {
 
   return games.update({gameName: gameName}, { $set: {currentRound: round} });
 }
+
+module.exports.setGameInstanceGameStageToGameOver = function(gameName) {
+
+  return games.update({gameName: gameName}, { $set: {gameStage: 'gameover'} });
+};
