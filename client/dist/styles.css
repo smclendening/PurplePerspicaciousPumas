@@ -5,7 +5,10 @@ body {
 /*  display: flex;
 */}
 
-#signup-header, #login-header {
+#signup-header, #login-header, #lobby, #create-game {
   text-align: center;
 }
 
+#create-game {
+  align-items: center;
+}

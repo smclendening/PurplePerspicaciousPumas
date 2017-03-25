@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import { Button, Form, FormGroup, Col, FormControl, ControlLabel, PageHeader } from 'react-bootstrap';
 
 class CreateGame extends React.Component {
   constructor(props) {
@@ -45,10 +46,29 @@ class CreateGame extends React.Component {
     return (
       <div id="choose-username">
         <h4>Start a New Game</h4>
-          <input placeholder="Start a new game..." type="text" value={this.state.gameName} onChange={this.handleChange} />
+          <input placeholder="Name your game..." type="text" value={this.state.gameName} onChange={this.handleChange} />
           <button onClick={() => this.addGameToDB(this.state.gameName, this.props.sendToGame)}>Submit</button>
       </div>
     )
+
+    // TODO: figure out the CreateGame component with React-Bootstrap (started below)
+    // return (
+    //   <div id="create-game">
+    //   <Form inline>
+    //     <FormGroup>
+    //       <Col sm={10}>
+    //         <FormControl type="name" placeholder="Name your game..." value={this.state.gameName} onChange={this.handleChange} />
+    //       </Col>
+    //     </FormGroup>
+    //     <Col sm={2}>
+    //       <Button type="submit" onClick={() => this.addGameToDB(this.state.gameName, this.props.sendToGame)}>
+    //         Create New Game
+    //       </Button>
+    //     </Col>
+    //   </Form>
+
+    //   </div>
+    // )
   }
 }
 export default CreateGame;
