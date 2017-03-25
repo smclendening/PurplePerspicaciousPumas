@@ -99,17 +99,6 @@ class SignUp extends React.Component {
     </Col>
 
     )
-
-    // return (
-    //   <div id="signup-container">
-    //     <h4>Create a New Account</h4>
-    //       {this.state.error && errorMessage}
-    //       <input placeholder="Email..." type="text" value={this.state.email} onChange={this.handleEmailChange} />
-    //       <input placeholder="Choose a username..." type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-    //       <input placeholder="Choose a password..." type="text" value={this.state.password} onChange={this.handlePasswordChange} />
-    //       <Button bsStyle="primary" onClick={() => this.handleSignUpAttempt(this.state.email, this.state.username, this.state.password)}>Submit</Button> 
-    //   </div>
-    // )
   }
 }
 export default SignUp;

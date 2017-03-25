@@ -5,7 +5,7 @@ body {
 /*  display: flex;
 */}
 
-#signup-header {
+#signup-header, #login-header {
   text-align: center;
 }
 
