@@ -7,7 +7,8 @@ import Winner from './PlayingGameComponents/Winner.jsx'
 import RespondToPrompt from './PlayingGameComponents/RespondToPrompt.jsx';
 import ChooseWinner from './PlayingGameComponents/ChooseWinner.jsx';
 import Score from './PlayingGameComponents/Score.jsx';
-// this.props.game = game instance object
+import { Col, PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
+
 
 class PlayingGame extends React.Component{
   constructor(props) {
@@ -57,8 +58,8 @@ class PlayingGame extends React.Component{
     var winner = this.props.game.rounds[curRound].winner;
 
     return (
-      <div id="playing-game">
-        <h2>Playing Game</h2>
+      <Col id="playing-game">
+        <PageHeader>{this.props.game.gameName}: <small>Round {this.props.game.currentRound + 1}</small></PageHeader>
         <div>
           <Score game={this.props.game}/>
           <CurrentJudge judge={curJudge} />
@@ -71,7 +72,7 @@ class PlayingGame extends React.Component{
         {stage === 1 && this.state.role === 'player' && <SeeResponses responses={responses}/>}
         {stage === 2 && <Winner responses={responses} winner={winner} handleReadyToMoveOn={this.props.handleReadyToMoveOn}/>}
         </div>
-      </div>
+      </Col>
     )
   }
 }
