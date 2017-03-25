@@ -2,6 +2,7 @@ import React from 'react';
 import GameList from './GameList.jsx';
 import $ from 'jquery';
 import CreateGame from './CreateGame.jsx';
+import YourGames from './YourGames.jsx';
 
 //TODO:
   // build logic to prevent users from joining a full game
@@ -18,6 +19,7 @@ class Lobby extends React.Component {
 
   componentDidMount() {
     this.getGames();
+    this.getUsername();
   }
 
   getGames() {
@@ -37,10 +39,26 @@ class Lobby extends React.Component {
     });
   }
 
+  getUsername() {
+    $.ajax({
+      url: 'http://localhost:3000/username',
+      method: 'GET',
+      headers: {'content-type': 'application/json'},
+      success: (username) => {
+        this.setState({username: username})
+      },
+      error: (err) => {
+        console.log('error getting username', err);
+      }
+    });
+  }
+
   render() {
     return (
       <div id="lobby">
         <h3>Lobby</h3>
+        <h4>Your Games:</h4>
+        {this.state.games && <YourGames games={this.state.games} username={this.state.username} sendToGame={this.props.route.sendToGame}/>}
         <h4>Games:</h4>
         {this.state.games && <GameList games={this.state.games} sendToGame={this.props.route.sendToGame}/>}
         <CreateGame sendToGame={this.props.route.sendToGame}/>
