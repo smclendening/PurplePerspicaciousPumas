@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem, PageHeader } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, PageHeader, } from 'react-bootstrap';
 
 const RoundSummary = (props) => (
   <div id="RoundSummary">
@@ -7,8 +7,8 @@ const RoundSummary = (props) => (
     <h5>Responses</h5>
     <ListGroup id="responses-summary">
       {props.round.responses.map((response) => (
-        <ListGroupItem id="response-item"> 
-         {response[1] === props.round.winner && 'WON: '}{response[0]} {response[1]} 
+        <ListGroupItem bsStyle={response[1] === props.round.winner ? 'success' : 'danger'}> 
+          <b>{response[1]}:</b> {response[0]} {response[1] === props.round.winner && <b>(WINNER)</b> } 
         </ListGroupItem>
       ))}
     </ListGroup>
