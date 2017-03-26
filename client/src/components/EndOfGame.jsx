@@ -1,7 +1,7 @@
 import React from 'react';
 import Score from './PlayingGameComponents/Score.jsx';
 import RoundSummary from './RoundSummary.jsx';
-import { Col, PageHeader } from 'react-bootstrap';
+import { Col, PageHeader, Button } from 'react-bootstrap';
 
 const EndOfGame = (props) => {
 	return (
@@ -19,11 +19,15 @@ const EndOfGame = (props) => {
 			  <br />
 			  <RoundSummary round={props.game.rounds[0]} judge={props.game.players[0]}/>
 			  <br />
+        <Button onClick={() => {
+            props.sendToLobby()
+          }
+        }>
+          Return to Lobby
+        </Button>
 	    </Col>
 		</Col>
-
 	)
-
 }
 
 export default EndOfGame;
