@@ -30,7 +30,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
 // mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
+
 
 app.post('/signup', function (req, res) {
   console.log('User tried to sign up', req.body.username);

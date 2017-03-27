@@ -1,5 +1,7 @@
 import React from 'react';
 import { Col, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+var Filter = require('bad-words');
+var filter = new Filter();
 
 class RespondToPrompt extends React.Component {
   constructor(props) {
@@ -13,9 +15,8 @@ class RespondToPrompt extends React.Component {
   }
 
   handleInputChange(event) {
-    this.setState({
-      response: event.target.value
-    });
+    var filteredResponse = filter.clean(event.target.value)
+    this.setState({response: filteredResponse});
   }
 
   render() {

@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 import { DropdownButton, MenuItem, Button, Form, FormGroup, Col, FormControl, ControlLabel, PageHeader } from 'react-bootstrap';
+var Filter = require('bad-words');
+var filter = new Filter();
 
 var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
 
@@ -17,11 +19,11 @@ class CreateGame extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({gameName: event.target.value});
+    var filteredGameName = filter.clean(event.target.value)
+    this.setState({gameName: filteredGameName});
   }
 
   addGameToDB(gameName, promptType, callback) {
-
     var initialStage = promptType === 'random' ? 0 : -1;
 
     var gameInstance = {

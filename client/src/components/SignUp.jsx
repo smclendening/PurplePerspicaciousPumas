@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import { Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
 var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
+var Filter = require('bad-words');
+var filter = new Filter();
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -24,9 +26,8 @@ class SignUp extends React.Component {
   }
 
   handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value
-    });
+    var filteredUsername = filter.clean(event.target.value)
+    this.setState({username: filteredUsername});
   }
 
   handlePasswordChange(event) {
