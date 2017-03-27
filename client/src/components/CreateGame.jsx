@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import { DropdownButton, MenuItem, Button, Form, FormGroup, Col, FormControl, ControlLabel, PageHeader } from 'react-bootstrap';
 
+var hostUrl = process.env.URL || 'http://localhost:3000/';
+
 class CreateGame extends React.Component {
   constructor(props) {
     super(props)
@@ -35,7 +37,7 @@ class CreateGame extends React.Component {
     }
 
     $.ajax({
-      url: 'http://localhost:3000/games',
+      url: hostUrl + 'games',
       method: 'POST',
       headers: {'content-type': 'application/json'},
       data: JSON.stringify(gameInstance),
