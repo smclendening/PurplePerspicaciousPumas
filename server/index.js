@@ -285,8 +285,11 @@ io.on('connection', (socket) => {
         setTimeout(function(){
           if (timer === 0 && Rooms[Sockets[socket]] < 4) {
             console.log('disconnectTimeOut')
-            // queries.setGameInstanceGameStageToGameOver(Sockets[socket]);
-            // io.to(Sockets[socket]).emit('disconnectTimeOut');
+            queries.setGameInstanceGameStageToGameOver(Sockets[socket])
+            .then(function(){
+              console.log(Sockets[socket]);
+                io.to(Sockets[socket]).emit('disconnectTimeOut');
+            })
           } else {
             if (Rooms[Sockets[socket]] < 4) {
               console.log(timer);
