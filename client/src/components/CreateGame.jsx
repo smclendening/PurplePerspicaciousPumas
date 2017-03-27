@@ -11,7 +11,8 @@ class CreateGame extends React.Component {
     super(props)
     this.state = {
       gameName: '',
-      promptType: 'random'
+      promptType: 'random',
+      error: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.addGameToDB = this.addGameToDB.bind(this);
@@ -48,6 +49,9 @@ class CreateGame extends React.Component {
       },
       error: (err) => {
         console.log('error in login POST: ', err);
+        this.setState({
+          error: true
+        })
       }
     });
   }
@@ -57,9 +61,13 @@ class CreateGame extends React.Component {
   }
 
   render() {
+
+    const errorMessage = <p><b>That game name has already been taken. Please try again with a different game name!</b></p>
+
     return (
       <div id="create-game">
         <h4>Start a New Game</h4>
+          {this.state.error && errorMessage}
           <input placeholder="Name your game..." type="text" value={this.state.gameName} onChange={this.handleChange} />
           <DropdownButton bsSize="small" title='Prompt-Type' id='0'>
             <MenuItem eventKey="1" onSelect={() => this.handlePromptTypeSelection('random')}>Random</MenuItem>
