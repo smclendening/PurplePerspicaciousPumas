@@ -296,7 +296,7 @@ io.on('connection', (socket) => {
             })
           } else {
             if (Rooms[Sockets[socket]] < 4) {
-              console.log(timer);
+              console.log(timer, Rooms[Sockets[socket]]);
               timer = timer - 1;
               disconnectTimeOut();
             }

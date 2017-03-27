@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
+var hostUrl = process.env.URL || 'http://localhost:3000/';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class SignUp extends React.Component {
 
   handleSignUpAttempt(email, username, password) {
     $.ajax({
-      url: 'http://localhost:3000/signup',
+      url: hostUrl + 'signup',
       method: 'POST',
       headers: {'content-type': 'application/json'},
       data: JSON.stringify({'username': username, 'email': email, 'password': password}),
