@@ -6,7 +6,7 @@ import $ from 'jquery';
 import io from 'socket.io-client';
 import { PageHeader } from 'react-bootstrap';
 
-var hostUrl = process.env.URL || 'http://localhost:3000/';
+var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
 
 const socket = io();
 

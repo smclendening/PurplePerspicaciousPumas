@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
-var hostUrl = process.env.URL || 'http://localhost:3000/';
+var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
 
 class SignUp extends React.Component {
   constructor(props) {
