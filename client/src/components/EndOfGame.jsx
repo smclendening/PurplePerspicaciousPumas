@@ -1,5 +1,6 @@
 import React from 'react';
 import Score from './PlayingGameComponents/Score.jsx';
+import GameWinner from './PlayingGameComponents/GameWinner.jsx';
 import RoundSummary from './RoundSummary.jsx';
 import { Col, PageHeader, Button } from 'react-bootstrap';
 
@@ -10,6 +11,8 @@ const EndOfGame = (props) => {
 	    <Col sm={6} smOffset={3}>
 	      <h4>Final Score</h4>
 	      <Score game={props.game}/>
+        <br />
+        <GameWinner game={props.game}/>
 			  <br />
 			  <RoundSummary round={props.game.rounds[3]} judge={props.game.players[3]}/>
 			  <br />
