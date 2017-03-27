@@ -8,6 +8,7 @@ import RespondToPrompt from './PlayingGameComponents/RespondToPrompt.jsx';
 import ChooseWinner from './PlayingGameComponents/ChooseWinner.jsx';
 import Score from './PlayingGameComponents/Score.jsx';
 import CreatePrompt from './PlayingGameComponents/CreatePrompt.jsx';
+import JudgeCreatingPrompt from './PlayingGameComponents/JudgeCreatingPrompt.jsx';
 import { Col, PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 
@@ -70,6 +71,7 @@ class PlayingGame extends React.Component{
           </Col>
         <Col sm={6} smOffset={3}>
         {stage === -1 && this.state.role === 'judge' && <CreatePrompt handlePromptSubmission={this.props.handlePromptSubmission}/>}
+        {stage === -1 && this.state.role === 'player' && <JudgeCreatingPrompt judge={curJudge}/>}
         {stage === 0 && this.state.role === 'judge' && <PlayersResponding />}
         {stage === 0 && this.state.role === 'player' && <RespondToPrompt handleResponse={this.props.handleResponse}/>}
         {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} handleJudgeSelection={this.props.handleJudgeSelection}/>}
