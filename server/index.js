@@ -10,7 +10,8 @@ var User = models.userModel;
 var Game = models.gameInstanceModel;
 var queries = require('../db/db-queries.js');
 var helpers = require('./helpers.js');
-var badwordsArray = require('badwords/array');
+var Filter = require('bad-words');
+var filter = new Filter();
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -31,8 +32,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-filter.setReplacementMethod('stars');
-filter.addWord(badwordsArray);
+
 // mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
 
 
@@ -179,20 +179,7 @@ io.on('connection', (socket) => {
   socket.on('submit response', (data) => {
     let gameName = data.gameName;
     let username = data.username;
-    let unfilteredResponses = data.response.replace(/\W+/g,' ').split(' ');
-
-    let filteredResponses = unfilteredResponses.map(function(word){
-      if(badwordsArray.includes(word.toLowerCase())){
-        let replacement = '';
-        for(var i = 0; i < word.length; i++){
-          replacement += '*';
-        }
-        return replacement;
-      } else {
-        return word;
-      }
-    });
-    let response = filteredResponses.join(' ');
+    let response = data.response;
 
     queries.retrieveGameInstance(gameName)
     .then(function(game) {
