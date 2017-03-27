@@ -99,6 +99,9 @@ var server = app.listen(port, function() {
 
 var io = require('socket.io')(server);
 
+var Sockets = {};
+var Rooms = {};
+
 io.on('connection', (socket) => {
   console.log('a user connected to the socket');
 
@@ -108,6 +111,10 @@ io.on('connection', (socket) => {
     socket.join(data.gameName);
     let username = data.username;
     let gameName = data.gameName;
+    Sockets[socket] = gameName;
+    console.log(Sockets[socket]);
+    Rooms[gameName] ? Rooms[gameName]++ : Rooms[gameName] = 1;
+    console.log(Rooms[gameName]);
     queries.retrieveGameInstance(gameName)
     .then(function (game){
     // add client to game DB if they're not already in players list
@@ -270,8 +277,37 @@ io.on('connection', (socket) => {
   })
 
 
-  socket.on('disconnect', () => {
-    console.log('a user disconnected');
+  socket.on('disconnect', (data) => {
+    if (Rooms[Sockets[socket]]) {
+      Rooms[Sockets[socket]]--;
+      let timer = 60;
+      var disconnectTimeOut = function() {
+        setTimeout(function(){
+          if (timer === 0 && Rooms[Sockets[socket]] < 4) {
+            console.log('disconnectTimeOut')
+            queries.setGameInstanceGameStageToGameOver(Sockets[socket])
+            .then(function(){
+              console.log(Sockets[socket]);
+                io.to(Sockets[socket]).emit('disconnectTimeOut');
+            })
+          } else {
+            if (Rooms[Sockets[socket]] < 4) {
+              console.log(timer);
+              timer = timer - 1;
+              disconnectTimeOut();
+            }
+          }
+        }, 1000);
+      }
+      queries.retrieveGameInstance(Sockets[socket])
+      .then(function(game) {
+        if (game.gameStage === 'playing') {
+          disconnectTimeOut();
+        }
+      });
+    }
+
+    console.log('a user disconnected', data);
   });
 });
 

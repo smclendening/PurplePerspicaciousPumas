@@ -40,6 +40,10 @@ class Game extends React.Component {
     socket.on('game over', (gameObj) => {
       this.setState({game: gameObj});
     })
+    socket.on('disconnectTimeOut', () => {
+      console.log('disconnectTimeOut')
+      this.props.route.sendToLobby.call(this, true);
+    })
 
   }
 
