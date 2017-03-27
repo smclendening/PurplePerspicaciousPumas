@@ -17,6 +17,6 @@ body {
   font-size: 18px;
 }
 
-#response-item {
+#response-item, #rules {
   text-align: left;
 }

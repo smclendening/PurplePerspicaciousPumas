@@ -1,4 +1,5 @@
 import React from 'react';
+import Rules from './Rules.jsx';
 import { Col, PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 const WaitingRoom = (props) => (
@@ -11,6 +12,9 @@ const WaitingRoom = (props) => (
       <ListGroup>
         {props.game.players.map( (player) => <ListGroupItem>{player}</ListGroupItem>)}
       </ListGroup>
+    </Col>
+    <Col sm={6} smOffset={3}>
+      <Rules/>
     </Col>
   </Col>
 )
