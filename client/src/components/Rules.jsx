@@ -18,7 +18,7 @@ const Rules = (props) => (
         funniest response.</ListGroupItem>
         <ListGroupItem><b>6. </b> This will repeat for four rounds until all players have taken a turn as the judge.</ListGroupItem>
         <ListGroupItem><b>7. </b> After the fourth round, we declare the winner!</ListGroupItem>
-        <ListGroupItem><b>8. </b> Round 1 will begin 15 seconds after the fourth and final player has joined the Waiting Room. Enjoy! </ListGroupItem>
+        <ListGroupItem><b>8. </b> Round 1 will begin as soon as the fourth player joins the game. Enjoy!</ListGroupItem>
       </ListGroup>
     </Col>
   </Col>
