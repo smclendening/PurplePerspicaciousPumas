@@ -30,7 +30,7 @@
 - React-Router
 - Socket.io
 - Socket.io-Client
-- Expres
+- Express
 
 ## Development
 
